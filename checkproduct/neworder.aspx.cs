@@ -5,16 +5,34 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using fengshan.DomainModel;
+using fengshan.Service;
+using System.IO;
 
 namespace fengshan
 {
+    
+
     public partial class neworder : System.Web.UI.Page
     {
+        private OrderService orderService = new OrderService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string json = Request.Params["req"];
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
+
+            Order order = JsonConvert.DeserializeObject<Order>(json);
+
+            order.flow = Flow.DefaultFlow;
+
+            bool status = orderService.saveOrder(order);
+
             var resp = new
             {
-                status = 0,
+                status = status ? 0 : -1,
                 errorMessage = ""
             };
 

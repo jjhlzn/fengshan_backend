@@ -10,6 +10,6 @@
 namespace fengshan.admin.production {
     
     
-    public partial class orders {
+    public partial class order {
     }
 }

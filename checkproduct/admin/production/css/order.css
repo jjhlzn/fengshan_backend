@@ -1,0 +1,23 @@
+﻿table {
+    border: solid 1px;
+    border-color: gray;
+    
+}
+
+td {
+    border: solid 1px;
+    border-color: lightgray;
+    padding-left: 5px;
+}
+
+tr {
+    height: 40px;
+}
+
+.imagerow {
+    height:400px;
+    width: 50%;
+}
+
+
+

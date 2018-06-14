@@ -25,11 +25,24 @@ namespace fengshan.DomainModel
         public String id;
         public String orderNo; //订单编号
         public String orderName;
+        public string taobaoId;
+        public string receiveOrderPerson;
         public Decimal amount; //金额
         public DateTime orderDate; //下单日期
         public DateTime deliveryDate; //发货日期
+        public String material;
+        public String size;
+        public String carveStyle;
+        public String color;
+        public String deliveryCompany;
+        public String deliveryPayType;
+        public String deliveryPackage;
+        public String address;
+        public int flag;
         public String memo;
-        public List<String> files = new List<string>();
+        public List<string> contentImages = new List<string>();
+        public List<string> templateImages = new List<string>();
+        public List<String> otherImages = new List<string>();
         public Flow flow;
 
         public Order() { }

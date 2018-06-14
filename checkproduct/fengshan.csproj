@@ -121,6 +121,8 @@
     <Content Include="admin\production\chartjs2.html" />
     <Content Include="admin\production\contacts.html" />
     <Content Include="admin\production\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="admin\production\css\order.css" />
+    <Content Include="admin\production\css\neworder.css" />
     <Content Include="admin\production\echarts.html" />
     <Content Include="admin\production\e_commerce.html" />
     <Content Include="admin\production\fixed_footer.html" />
@@ -155,7 +157,9 @@
     <Content Include="admin\production\index3.html" />
     <Content Include="admin\production\invoice.html" />
     <Content Include="admin\production\js\datepicker\daterangepicker.js" />
+    <Content Include="admin\production\js\lodash.js" />
     <Content Include="admin\production\js\moment\moment.min.js" />
+    <Content Include="admin\production\js\neworder.js" />
     <Content Include="admin\production\level2.html" />
     <Content Include="admin\production\login.html" />
     <Content Include="admin\production\map.html" />
@@ -184,6 +188,7 @@
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="admin\production\order.aspx" />
     <Content Include="admin\production\neworder.aspx" />
     <Content Include="admin\production\orders.aspx" />
     <Content Include="admin\production\other_charts.html" />
@@ -3557,6 +3562,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\production\admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\production\order.aspx.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\order.aspx.designer.cs">
+      <DependentUpon>order.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\production\neworder.aspx.cs">
       <DependentUpon>neworder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3631,6 +3650,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CheckOrderService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="setflowstatus.aspx.cs">
       <DependentUpon>setflowstatus.aspx</DependentUpon>
@@ -4366,6 +4386,7 @@
     <Content Include="admin\jQuery-File-Upload\server\php\files\.htaccess" />
     <Content Include="admin\jQuery-File-Upload\server\php\index.php" />
     <Content Include="admin\jQuery-File-Upload\server\php\UploadHandler.php" />
+    <Content Include="admin\production\admin.Master" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -34,7 +34,7 @@ namespace fengshan
             order.deliveryDate = DateTime.Now.AddDays(10);
             order.amount = 100;
             order.flow = new Flow(Flow.DefaultFlow);
-            order.files.Add("test.jpg");
+            order.otherImages.Add("test.jpg");
             return order;
         }
     }
