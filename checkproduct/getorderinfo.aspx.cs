@@ -6,36 +6,41 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using fengshan.DomainModel;
+using System.IO;
+using log4net;
+using fengshan.Service;
 
 namespace fengshan
 {
+    class GetOrderRequest
+    {
+        public string orderNo;
+    }
+
     public partial class getorderinfo : System.Web.UI.Page
     {
+        private ILog logger = LogManager.GetLogger(typeof(getorderinfo));
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string json = Request.Params["req"];
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
+            logger.Debug(json);
+            GetOrderRequest request = JsonConvert.DeserializeObject<GetOrderRequest>(json);
+
+            Order order = new OrderService().getOrder(request.orderNo);
+
             var resp = new
             {
-                status = 0,
+                status = order != null ? 0 : -1,
                 errorMessage = "",
-                order = makeOrder()
+                order = order
             };
 
             Response.Write(JsonConvert.SerializeObject(resp));
             Response.End();
-        }
-
-
-        private Order makeOrder()
-        {
-            Order order = new Order();
-            order.orderNo = "123456";
-            order.orderDate = DateTime.Now;
-            order.orderName = "牌匾";
-            order.deliveryDate = DateTime.Now.AddDays(10);
-            order.amount = 100;
-            order.flow = new Flow(Flow.DefaultFlow);
-            order.otherImages.Add("test.jpg");
-            return order;
         }
     }
 }

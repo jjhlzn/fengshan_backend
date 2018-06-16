@@ -48,6 +48,11 @@ namespace checkproduct
             
         }
 
+        private string getSuffix(string fileName)
+        {
+            return fileName.Substring(fileName.LastIndexOf("."));
+        }
+
         private String uploadImage(HttpPostedFile myFile) 
         {
             if (myFile != null && myFile.ContentLength != 0)
@@ -55,7 +60,7 @@ namespace checkproduct
                 logger.Debug("myFile.contentLength = " + myFile.ContentLength);
 
                 string pathForSaving = Server.MapPath("~/uploads");
-                String newFileName = DateTime.Now.Ticks + myFile.FileName;
+                String newFileName = Guid.NewGuid().ToString() + getSuffix(myFile.FileName);
                 try
                 {
                     myFile.SaveAs(Path.Combine(pathForSaving, newFileName));

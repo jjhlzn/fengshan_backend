@@ -120,9 +120,11 @@
     <Content Include="admin\production\chartjs.html" />
     <Content Include="admin\production\chartjs2.html" />
     <Content Include="admin\production\contacts.html" />
+    <Content Include="admin\production\css\dropzone.css" />
     <Content Include="admin\production\css\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="admin\production\css\order.css" />
     <Content Include="admin\production\css\neworder.css" />
+    <Content Include="admin\production\css\orders.css" />
     <Content Include="admin\production\echarts.html" />
     <Content Include="admin\production\e_commerce.html" />
     <Content Include="admin\production\fixed_footer.html" />
@@ -137,7 +139,10 @@
     <Content Include="admin\production\glyphicons.html" />
     <Content Include="admin\production\icons.html" />
     <Content Include="admin\production\images\american-express.png" />
+    <Content Include="admin\production\images\finished.png" />
     <Content Include="admin\production\images\cropper.jpg" />
+    <Content Include="admin\production\images\arrow.png" />
+    <Content Include="admin\production\images\notfinished.png" />
     <Content Include="admin\production\images\img.jpg" />
     <Content Include="admin\production\images\inbox.png" />
     <Content Include="admin\production\images\mastercard.png" />
@@ -157,9 +162,13 @@
     <Content Include="admin\production\index3.html" />
     <Content Include="admin\production\invoice.html" />
     <Content Include="admin\production\js\datepicker\daterangepicker.js" />
+    <Content Include="admin\production\js\dropzone.js" />
     <Content Include="admin\production\js\lodash.js" />
     <Content Include="admin\production\js\moment\moment.min.js" />
     <Content Include="admin\production\js\neworder.js" />
+    <Content Include="admin\production\js\order.js" />
+    <Content Include="admin\production\js\orders.js" />
+    <Content Include="admin\production\js\pagination.min.js" />
     <Content Include="admin\production\level2.html" />
     <Content Include="admin\production\login.html" />
     <Content Include="admin\production\map.html" />
@@ -3592,7 +3601,6 @@
     </Compile>
     <Compile Include="deleteorder.aspx.cs">
       <DependentUpon>deleteorder.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="deleteorder.aspx.designer.cs">
       <DependentUpon>deleteorder.aspx</DependentUpon>
@@ -3600,14 +3608,12 @@
     <Compile Include="DomainModel\Order.cs" />
     <Compile Include="getorderinfo.aspx.cs">
       <DependentUpon>getorderinfo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="getorderinfo.aspx.designer.cs">
       <DependentUpon>getorderinfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="getorders.aspx.cs">
       <DependentUpon>getorders.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="neworder.aspx.cs">
       <DependentUpon>neworder.aspx</DependentUpon>

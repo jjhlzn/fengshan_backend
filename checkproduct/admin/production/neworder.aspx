@@ -10,7 +10,7 @@
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
-    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!--<link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet"> -->
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <!-- Switchery -->
@@ -23,22 +23,13 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="../jQuery-File-Upload/css/style.css">
-    <!-- blueimp Gallery styles -->
-    <link rel="stylesheet" href="https://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <link rel="stylesheet" href="../jQuery-File-Upload/css/jquery.fileupload.css">
-    <link rel="stylesheet" href="../jQuery-File-Upload/css/jquery.fileupload-ui.css">
-    <!-- CSS adjustments for browsers with JavaScript disabled -->
-    <noscript><link rel="stylesheet" href="../jQuery-File-Upload/css/jquery.fileupload-noscript.css"></noscript>
-    <noscript><link rel="stylesheet" href="../jQuery-File-Upload/css/jquery.fileupload-ui-noscript.css"></noscript>
-
+     <link href="./css/dropzone.css" rel="stylesheet">
     <link href="./css/neworder.css" rel="stylesheet">
 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div class="right_col" role="main">
+    <div id="formdiv" class="right_col" role="main" data-parsley-validate="">
      <div class="">
         
             <div class="clearfix"></div>
@@ -55,64 +46,50 @@
                     <div id="demo-form2" class="form-horizontal form-label-left">
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">订单名称
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="orderName" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">金额
-                        </label>
-                        <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input type="text" id="amount" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-
-                      <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">淘宝ID
                         </label>
                        <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input type="text" id="taobaoId" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="taobaoId" required="" data-parsley-errors-messages-disabled="" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div>
 
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">接单人
+                        <label class="control-label col-md-2 col-sm-2 col-xs-4" for="last-name">接单人
                         </label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select id="receiveOrderPerson" class="select2_single form-control" tabindex="-1">
-                            <option>选择接单人</option>
+                          <select id="receiveOrderPerson" required="" data-parsley-errors-messages-disabled="" class="select2_single form-control" tabindex="-1">
+                            <option value="">选择接单人</option>
                             <option value="张三">张三</option>
                             <option value="李四">李四</option>
                           </select>
                         </div>
                       </div>
 
-                     
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">订单名称
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                          <input type="text" id="orderName" required="" data-parsley-errors-messages-disabled="" class="form-control col-md-7 col-xs-12">
+                        </div>
+
+                        <label class="control-label col-md-2 col-sm-2 col-xs-4"  for="first-name">金额
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                          <input type="text" id="amount" required="" data-parsley-errors-messages-disabled="" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+
 
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">接单时间</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input id="orderDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name" 
+                          <input id="orderDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled=""
                               onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})">
                         </div>
-                      </div>
 
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">发货时间</label>
+                        <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-4">发货时间</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input id="deliveryDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name" 
+                          <input id="deliveryDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name"  required="" data-parsley-errors-messages-disabled=""
                               onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})">
-                        </div>
-                      </div>
-
-
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">材质</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="material" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
                         </div>
                       </div>
 
@@ -120,10 +97,50 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">款式</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select class="select2_single form-control" tabindex="-1" id="style">
-                            <option>选择款式</option>
+                          <select class="select2_single form-control" tabindex="-1" id="style" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择款式</option>
                             <option value="规则">规则</option>
                             <option value="不规则">不规则</option>
+                              <option value="圆">圆</option>
+                            <option value="其他">其他</option>
+
+                          </select>
+                        </div>
+
+                        <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-4">雕刻方式</label>
+                        <div class="col-md-2 col-sm-2 col-xs-4">
+                          <select class="select2_single form-control" tabindex="-1" id="carveStyle" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择雕刻方式</option>
+                            <option value="阴包阳">阴包阳</option>
+                            <option value="圆弧阴雕">圆弧阴雕</option>
+                              <option value="直角阴雕">直角阴雕</option>
+                              <option value="圆弧阴雕">圆弧阴雕</option>
+                              <option value="直角阳雕">直角阳雕</option>
+                              <option value="其他">其他</option>
+                          </select>
+                        </div>
+                      </div>
+
+                    <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">材质</label>
+                        <div class="col-md-2 col-sm-4 col-xs-4">
+                          <select class="select2_single form-control" tabindex="-1" id="material" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择材质</option> 
+                            <option value="樟子松">樟子松</option>
+                            <option value="红松">红松</option>
+                            <option value="香樟木">香樟木</option>
+                            <option value="榆木">榆木</option>
+                            <option value="菠萝格">菠萝格</option>
+                            <option value="红花梨">红花梨</option>
+                            <option value="其他">其他</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                          <select class="select2_single form-control" tabindex="-1" id="isDuban" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择是否独板</option> 
+                            <option value="独板">独板</option>
+                            <option value="不是独板">不是独板</option>
                           </select>
                         </div>
                       </div>
@@ -131,47 +148,45 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">尺寸</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="size" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                          <input id="size" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled="">
                         </div>
                       </div>
 
-                      <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">雕刻方式</label>
-                        <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select class="select2_single form-control" tabindex="-1" id="carveStyle">
-                            <option>选择雕刻方式</option>
-                            <option value="圆弧阴雕">圆弧阴雕</option>
-                            <option value="普通雕刻">普通雕刻</option>
-                          </select>
-                        </div>
-                      </div>
+          
 
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">颜色</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="color" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                          <input id="color" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled="">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">物流方式</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select class="select2_single form-control" tabindex="-1" id="deliveryCompany">
-                            <option>选择物流</option>
+                          <select class="select2_single form-control" tabindex="-1" id="deliveryCompany" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择物流</option>
                             <option value="顺丰">顺丰</option>
-                            <option value="德邦">德邦</option>
+                            <option value="德邦快递">德邦快递</option>
+                              <option value="德邦物流电商冲减">德邦物流电商冲减</option>
+                              <option value="德邦物流普通自提">德邦物流普通自提</option>
+                              <option value="中通物流">中通物流</option>
+                              <option value="百世物流">百世物流</option>
+                              <option value="安能物流">安能物流</option>
+                              <option value="专线托运">专线托运</option>
+                              <option value="其他">其他</option>
                           </select>
                         </div>
                          <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select class="select2_single form-control" tabindex="-1" id="deliveryPayType">
-                            <option>选择支付方式</option>
+                          <select class="select2_single form-control" tabindex="-1" id="deliveryPayType" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择支付方式</option>
+                            <option value="包邮">包邮</option>
                             <option value="到付">到付</option>
-                            <option value="预付">预付</option>
                           </select>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <select class="select2_single form-control" tabindex="-1" id="deliveryStyle">
-                            <option>选择打包方式</option>
+                          <select class="select2_single form-control" tabindex="-1" id="deliveryPackage" required="" data-parsley-errors-messages-disabled="">
+                            <option value="">选择打包方式</option>
                             <option value="打木架">打木架</option>
                             <option value="不打木架">不打木架</option>
                           </select>
@@ -181,62 +196,40 @@
                      <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">收货人地址</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                           <textarea id="address" class="form-control" rows="3" placeholder='输入地址'></textarea>
+                           <textarea id="address" class="form-control" rows="2" placeholder='输入地址' required="" data-parsley-errors-messages-disabled=""></textarea>
                         </div>
                      </div>
                      <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">备注</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                           <textarea id="meno" class="form-control" rows="3" placeholder='输入备注'></textarea>
+                           <textarea id="meno" class="form-control" rows="2" placeholder='输入备注'></textarea>
                         </div>
                      </div>
 
-                     <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">内容+颜色样板图片</label>
-                         <div class="col-md-8 col-sm-8 col-xs-16">
-                            <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-
-                                <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                                <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
-                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                <div class="row fileupload-buttonbar">
-                                    <div class="col-lg-7">
-                                        <!-- The fileinput-button span is used to style the file input field as button -->
-                                        <span class="btn btn-success fileinput-button">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                            <span>添加图片</span>
-                                            <input type="file" name="files[]" multiple>
-                                        </span>
-                                        <button type="submit" class="btn btn-primary start">
-                                            <i class="glyphicon glyphicon-upload"></i>
-                                            <span>开始上传</span>
-                                        </button>
-                                        <!-- The global file processing state -->
-                                        <span class="fileupload-process"></span>
-                                    </div>
-                                    <!-- The global progress state -->
-                                    <div class="col-lg-5 fileupload-progress fade">
-                                        <!-- The global progress bar -->
-                                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                        </div>
-                                        <!-- The extended global progress state -->
-                                        <div class="progress-extended">&nbsp;</div>
-                                    </div>
-                                </div>
-                                <!-- The table listing the files available for upload/download -->
-                                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                            </form>
-                          </div>
+                    <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">内容图片</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <form action="/upload.aspx"
+                              class="dropzone"
+                              id="my-awesome-dropzone"></form>
+                        </div>
                      </div>
 
-                    
-                      
+                    <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">内容图片</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <form action="/upload.aspx"
+                              class="dropzone"
+                              id="my-awesome-dropzone2"></form>
+                        </div>
+                     </div>
+                   
+
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-success" onclick="submitForm()">提交</button>
+                          <button type="submit" class="btn btn-success " onclick="submitForm()">提交</button>
                         </div>
                       </div>
 
@@ -246,7 +239,6 @@
               </div>
             </div>
 
-        
 
 
       
@@ -255,81 +247,6 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="JSPlaceHolder" runat="server">
 
-        <!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
-        <td>
-            <span class="preview"></span>
-        </td>
-        <td>
-            <p class="name">{%=file.name%}</p>
-            <strong class="error text-danger"></strong>
-        </td>
-        <td>
-            <p class="size">Processing...</p>
-            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
-        </td>
-        <td>
-            {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-primary start" disabled>
-                    <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start</span>
-                </button>
-            {% } %}
-            {% if (!i) { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-            {% } %}
-        </td>
-    </tr>
-{% } %}
-</script>
-<!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-download fade">
-        <td>
-            <span class="preview">
-                {% if (file.thumbnailUrl) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                {% } %}
-            </span>
-        </td>
-        <td>
-            <p class="name">
-                {% if (file.url) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-                {% } else { %}
-                    <span>{%=file.name%}</span>
-                {% } %}
-            </p>
-            {% if (file.error) { %}
-                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-            {% } %}
-        </td>
-        <td>
-            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-        </td>
-        <td>
-            {% if (file.deleteUrl) { %}
-                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-                    <i class="glyphicon glyphicon-trash"></i>
-                    <span>Delete</span>
-                </button>
-                <input type="checkbox" name="delete" value="1" class="toggle">
-            {% } else { %}
-                <button class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel</span>
-                </button>
-            {% } %}
-        </td>
-    </tr>
-{% } %}
-</script>
 
             <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -365,39 +282,15 @@
     <!-- starrr -->
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    
     <script src="../My97DatePicker/WdatePicker.js"></script>
      <script src="./js/lodash.js"></script>
 
 
-    <script src="../jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-    <!-- blueimp Gallery script -->
-    <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-    <script src="../jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-    <!-- The basic File Upload plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload.js"></script>
-    <!-- The File Upload processing plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
-    <!-- The File Upload image preview & resize plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-image.js"></script>
-    <!-- The File Upload audio preview plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-audio.js"></script>
-    <!-- The File Upload video preview plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
-    <!-- The File Upload validation plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
-    <!-- The File Upload user interface plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-ui.js"></script>
-    <!-- The main application script -->
-    <script src="../jQuery-File-Upload/js/main.js"></script>
 
+     <script src="./js/dropzone.js"></script>
      <script src="./js/neworder.js"></script>
+
+    <script src="../build/js/custom.min.js"></script> 
 </asp:Content>
 

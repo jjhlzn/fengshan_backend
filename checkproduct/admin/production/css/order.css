@@ -19,5 +19,32 @@ tr {
     width: 50%;
 }
 
+.statusDiv {
+    width: 80px;
+    height: 80px;
+}
+
+.statusImage {
+    margin-top:10px;
+    margin-left: 20px;
+    width: 40px;
+}
+
+.arrowImage {
+    width: 20px;
+}
 
 
+.statusText{
+    margin-top: 4px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.progressTable {
+    border: none;
+}
+
+.progressTable td {
+    border: none;
+}

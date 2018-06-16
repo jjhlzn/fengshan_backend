@@ -12,6 +12,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="./css/orders.css" rel="stylesheet">
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -32,15 +33,30 @@
 
                   <div class="x_content">
 
+                     <div class="row">
+                      <table class="searchTable">
+                          <tr>
+                              <td>关键字:</td>
+                              <td><input id="keyword" class="searchInput keywordInput" type="text" name="middle-name"></td>
+                              <td>发货时间:</td>
+                              <td><input id="startDate" class="searchInput" type="text" name="middle-name" 
+                                  onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})"></td>
+                              <td>至</td>
+                              <td><input id="endDate" class="searchInput" type="text" name="middle-name" 
+                                  onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})"></td>
+                              <td></td>
+                              <td><button  class=" searchBtn" onclick="searchClick(); return false;">查询</button></td>
+                          </tr>
+                      </table>
+                    
+                    </div>
               
 
                     <div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
+                        
                             <th class="column-title">订单编号 </th>
                             <th class="column-title">订单名称 </th>
                             <th class="column-title">发货时间 </th>
@@ -48,17 +64,20 @@
                             
                             <th class="column-title">金额 </th>
                             <th class="column-title">接单人 </th>
+
+                              <!--
                             <th class="column-title no-link last"><span class="nobr"></span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
+                            </th> -->
                           </tr>
                         </thead>
 
-                        <tbody>
-                          <tr class="even pointer">
-                            <td class="a-center ">
+                        <tbody id="tableBody">
+                            <!--
+                          <tr class="even pointer"  onclick="clickItem()">
+                            <td class="a-center " >
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
                             <td class=" ">121000040</td>
@@ -187,11 +206,11 @@
                             <td class="a-right a-right ">小张</td>
                             <td class=" last"><a href="#">View</a>
                             </td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
-							
+				    <div id="pagination"></div>
 						
                   </div>
                 </div>
@@ -210,8 +229,15 @@
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
+        <script src="../My97DatePicker/WdatePicker.js"></script>
+     <script src="./js/lodash.js"></script>
+
+
+        <script src="./js/orders.js"></script>
 
     <!-- Custom Theme Scripts -->
+
     <script src="../build/js/custom.min.js"></script>
+
 </asp:Content>
 

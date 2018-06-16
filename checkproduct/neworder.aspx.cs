@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using fengshan.DomainModel;
 using fengshan.Service;
 using System.IO;
+using log4net;
 
 namespace fengshan
 {
@@ -15,6 +16,7 @@ namespace fengshan
 
     public partial class neworder : System.Web.UI.Page
     {
+        private ILog logger = LogManager.GetLogger(typeof(neworder));
         private OrderService orderService = new OrderService();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -23,7 +25,7 @@ namespace fengshan
             Stream req = Request.InputStream;
             req.Seek(0, System.IO.SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
-
+            logger.Debug(json);
             Order order = JsonConvert.DeserializeObject<Order>(json);
 
             order.flow = Flow.DefaultFlow;

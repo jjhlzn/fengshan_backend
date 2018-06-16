@@ -9,8 +9,6 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-    <!-- bootstrap-wysiwyg -->
-    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
     <!-- Select2 -->
     <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
     <!-- Switchery -->
@@ -43,63 +41,93 @@
                   <div class="x_content ordercontent " >
                     <br />
 
-                    <table style="width: 70%; margin: auto">
+                     <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                        <button class="btn btn-success " onclick="alert('未实现');return false;">打印</button>
+                        <button class="btn btn-danger " onclick="alert('未实现');return false;">删除</button>
+                    </div>
+
+
+                    <table style="width: 72%; margin: auto">
                         <tr>
-                            <td style="width: 10%; text-align: center">淘宝ID：</td>
-                            <td> 1234567</td>
-                            <td style="width: 10% ;  text-align: center">接单人：</td>
-                            <td> 小刘</td>
+                            <td style="width: 11%; text-align: center">淘宝ID：</td>
+                            <td id="taobaoId"> </td>
+                            <td style="width: 11% ;  text-align: center">接单人：</td>
+                            <td id="receiveOrderPerson"> </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 11%; text-align: center">订单名称：</td>
+                            <td id="orderName"> </td>
+                            <td style="width: 11% ;  text-align: center">金额：</td>
+                            <td id="amount"> </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 11%; text-align: center">接单时间：</td>
+                            <td id="orderDate"> </td>
+                            <td style="width: 11% ;  text-align: center">发货时间：</td>
+                            <td id="deliveryDate"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 11%; text-align: center">款式：</td>
+                            <td id="style"> </td>
+                            <td style="width: 11% ;  text-align: center">雕刻方式：</td>
+                            <td id="carveStyle"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 11%; text-align: center">材质：</td>
+                            <td id="material" colspan="3" > </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width: 11%; text-align: center">尺寸：</td>
+                            <td id="size" colspan="3" ></td>
                         </tr>
                         <tr>
-                            <td style="width: 10%; text-align: center">接单时间：</td>
-                            <td> 2018-03-01</td>
-                            <td style="width: 10% ;  text-align: center">发货时间：</td>
-                            <td> 2018-03-01</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 10%; text-align: center">材质：</td>
-                            <td> 木头</td>
-                            <td style="width: 10% ;  text-align: center">款式：</td>
-                            <td> 规则</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 10%; text-align: center">尺寸：</td>
-                            <td> 10*20cm</td>
-                            <td style="width: 10% ;  text-align: center">雕刻方式：</td>
-                            <td> 圆弧阴雕 </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 10%; text-align: center">颜色：</td>
-                            <td colspan="3"> 红色</td>
+                            <td style="width: 11%; text-align: center">颜色：</td>
+                            <td colspan="3" id="color"> </td>
     
                         </tr>
                         
                         <tr>
-                            <td style="width: 10%; text-align: center">物流方式：</td>
-                            <td colspan="3"> 顺丰 -  到付  - 打木架</td>
+                            <td style="width: 11%; text-align: center">物流方式：</td>
+                            <td colspan="3" id="delivery"> </td>
     
                         </tr>
                         <tr>
-                            <td style="width: 10%; text-align: center">收货人：</td>
-                            <td colspan="3"> 浙江省东阳市横店镇万盛南街58号 1370674299 金军航</td>
+                            <td style="width: 11%; text-align: center">收货人：</td>
+                            <td colspan="3" id="address"> </td>
+                        </tr>
+                        <tr >
+                            <td style="width: 11%; text-align: center">进度：</td>
+                            <td  colspan="3" style="width: 89%;" id="progress">
+
+                               <table class="progressTable">
+                                   <tr id="progressRow">
+                                       
+                                   </tr>
+                               </table>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2" class="imagerow"> 
                                 <div style="width: 100%; height: 100%;">
-                                    内容：
-                                    <img width="98%"
-                                        src="http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png"/>
-                                    <img width="98%"
-                                        src="http://pic.58pic.com/58pic/13/66/58/20258PICpDh_1024.png"/>
+                                    &nbsp; &nbsp; &nbsp;内容：
+                                    <div style="width: 100%; height: 100%;" id="contentImagesDiv">
+                                        </div>
+                                    
+                                   
                                 </div>
                             </td>
                             <td colspan="2"  class="imagerow"> 
                                 <div style="width: 100%; height: 100%;">
-                                    颜色样板：
-                                    <img width="98%"
-                                        src="http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png"/>
-                                    <img width="98%"
-                                        src="http://pic.58pic.com/58pic/13/66/58/20258PICpDh_1024.png"/>
+                                      &nbsp; &nbsp; &nbsp;颜色样板：
+                                    <div style="width: 100%; height: 100%;" id="templateImagesDiv">
+                                        </div>
+                                   
+                                 
                                 </div>
                             </td>
                         </tr>
@@ -142,8 +170,6 @@
     <script src="../vendors/switchery/dist/switchery.min.js"></script>
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
-    <!-- Parsley -->
-    <script src="../vendors/parsleyjs/dist/parsley.min.js"></script>
     <!-- Autosize -->
     <script src="../vendors/autosize/dist/autosize.min.js"></script>
     <!-- jQuery autocomplete -->
@@ -154,34 +180,8 @@
     <script src="../build/js/custom.min.js"></script>
     <script src="../My97DatePicker/WdatePicker.js"></script>
 
-
-    <script src="../jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="https://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
-    <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-    <script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-    <script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-    <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-    <!-- blueimp Gallery script -->
-    <script src="https://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-    <script src="../jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-    <!-- The basic File Upload plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload.js"></script>
-    <!-- The File Upload processing plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
-    <!-- The File Upload image preview & resize plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-image.js"></script>
-    <!-- The File Upload audio preview plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-audio.js"></script>
-    <!-- The File Upload video preview plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
-    <!-- The File Upload validation plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
-    <!-- The File Upload user interface plugin -->
-    <script src="../jQuery-File-Upload/js/jquery.fileupload-ui.js"></script>
-    <!-- The main application script -->
-    <script src="../jQuery-File-Upload/js/main.js"></script>
+    <script src="./js/lodash.js"></script>
+     <script src="./js/order.js"></script>
 </asp:Content>
 
 

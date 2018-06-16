@@ -4,10 +4,22 @@ using Newtonsoft.Json;
 using fengshan.DomainModel;
 using checkproduct.Service;
 using log4net;
-
+using System.IO;
+using fengshan.Service;
 
 namespace fengshan
 {
+    class QueryRequest
+    {
+        public string startDate;
+        public string endDate;
+        public string keyword;
+        public string status;
+        public int pageNo;
+        public int pageSize;
+        
+    }
+
     public partial class getorders : System.Web.UI.Page
     {
         //private CheckOrderService checkOrderService = new CheckOrderService();
@@ -15,31 +27,21 @@ namespace fengshan
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            PageInfo pageInfo = new PageInfo();
-            string username = Request.Params["username"];
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
 
-            //string ticketNo = Request.Params["ticketNo"] ?? "";
-            //ticketNo = ticketNo.Trim();
-            
-            string startDate = Request.Params["startDate"];
-            string endDate = Request.Params["endDate"];
-            string status = Request.Params["status"];
-            string pageNo = Request.Params["pageNo"] ?? "0";
+            QueryRequest query = JsonConvert.DeserializeObject<QueryRequest>(json);
 
-            //string str = string.Format(@"ticketNo = {0}, startDate = {1}, endDate = {2}, status = {3}, pageNo = {4}, username = {5}, checker = {6}",
-            //    ticketNo, startDate, endDate, status, pageNo, username, checker);
-            //logger.Debug("params: " + str);
-
-            pageInfo.pageNo = int.Parse(pageNo);
-
-            //GetCheckOrdersResult checkOrdersResult = checkOrderService.GetCheckOrders(DateTime.Now, DateTime.Now, status, username,checker, pageInfo, ticketNo);
+            QueryResult result = new OrderService().search(query.startDate, query.endDate, query.keyword, query.pageNo, query.pageSize);
 
             var resp = new
             {
                 status = 0,
                 errorMessage = "",
-                totalCount = 40,
-                items = getOrders()
+                totalCount = result.orders,
+                pages = (result.totalCount + query.pageSize - 1) / query.pageSize,
+                items = result.orders
             };
 
             Response.Write(JsonConvert.SerializeObject(resp));
@@ -63,9 +65,9 @@ namespace fengshan
         {
             Order order = new Order();
             order.orderNo = "123456";
-            order.orderDate = DateTime.Now;
+            order.orderDate = "2018-01-01";
             order.orderName = "牌匾";
-            order.deliveryDate = DateTime.Now.AddDays(10);
+            order.deliveryDate = "2018-01-01";
             order.amount = 100;
             order.flow = new Flow(Flow.DefaultFlow);
             return order;

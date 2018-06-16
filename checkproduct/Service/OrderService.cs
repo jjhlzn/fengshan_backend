@@ -9,6 +9,11 @@ using System.Data;
 
 namespace fengshan.Service
 {
+    public class QueryResult
+    {
+        public List<Order> orders = new List<Order>();
+        public int totalCount;
+    }
     public class OrderService
     {
         private static ILog logger = LogManager.GetLogger(typeof(OrderService));
@@ -21,19 +26,22 @@ namespace fengshan.Service
             {
                 string sql = @"insert into t_order (id, orderNo, taobaoId, receiveOrderPerson, orderDate, deliveryDate,
                                material, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address,
-                               memo, amount, orderName) 
+                               memo, amount, orderName, style, isDuban) 
                                values 
                                (@id, @orderNo, @taobaoId, @receiveOrderPerson, @orderDate,
                                @deliveryDate, @material, @size, @carveStyle, @color, @deliveryCompany, @deliveryPayType, @deliveryPackage, @address,
-                               @memo, @amount, @orderName)";
+                               @memo, @amount, @orderName, @style, @isDuban)";
                 sql = string.Format(sql, sql);
                 logger.Debug("sql: " + sql);
+                logger.Debug("order.orderDate = " + order.orderDate);
+                logger.Debug("order.deliveryDate = " + order.deliveryDate);
+                logger.Debug("order.taobaoId = " + order.taobaoId);
                 int rowCount = conn.Execute(sql, new { id = order.id, orderNo = order.orderNo,
                     taobaoId = order.taobaoId, receiveOrderPerson = order.receiveOrderPerson,
                     orderDate = order.orderDate, deliveryDate = order.deliveryDate, material = order.material, size = order.size,
                     carveStyle = order.carveStyle, color = order.color, deliveryCompany = order.deliveryCompany, 
                     deliveryPayType = order.deliveryPayType, deliveryPackage = order.deliveryPackage, address = order.address,
-                    memo = order.memo, amount = order.amount, orderName = order.orderName
+                    memo = order.memo, amount = order.amount, orderName = order.orderName, style = order.style, isDuban = order.isDuban
                 });
 
                 if (rowCount != 1)
@@ -43,10 +51,10 @@ namespace fengshan.Service
                 }
 
                 //添加默认的flow
-                sql = @"insert into t_order_status (id, orderNo, statusName) values (@id, @orderNo, @statusName)";
+                sql = @"insert into t_order_status (id, orderNo, statusName, sequence) values (@id, @orderNo, @statusName, @sequence)";
                 foreach (FlowStatus status in order.flow.statusList)
                 {
-                   rowCount = conn.Execute(sql, new { id = Guid.NewGuid(), orderNo = order.orderNo, statusName = status.name });
+                   rowCount = conn.Execute(sql, new { id = Guid.NewGuid(), orderNo = order.orderNo, statusName = status.name, sequence = status.sequence });
                     if (rowCount != 1)
                     {
                         logger.Fatal("insert t_order_status fail： status = " + status.name);
@@ -54,7 +62,128 @@ namespace fengshan.Service
                     }
                 }
 
+                //关联图片
+                sql = @"insert into t_order_img (id, orderNo, type, imageurl) values (@id, @orderNo, @type, @imageUrl)";
+                foreach(string imageUrl in order.contentImages)
+                {
+                    conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = order.orderNo, type = "content", imageUrl = imageUrl });
+                }
+                foreach(string imageUrl in order.templateImages)
+                {
+                    conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = order.orderNo, type = "template", imageUrl = imageUrl });
+                }
+
                 return true;
+            }
+        }
+
+        public QueryResult search(string startDate, string endDate, string keyword, int pageNo, int pageSize)
+        {
+            string orderSum = @"orderNo + taobaoId + receiveOrderPerson  +material +
+                                size + carveStyle + color + deliveryCompany +deliveryPayType +deliveryPackage + 
+                                address + memo";
+
+            string where = " deliveryDate between '" + startDate+"' and '" + endDate+"'  and  " + orderSum + " like '%" +keyword + "%' and flag = 0 ";
+
+            int skipCount = pageNo * pageSize;
+
+            string sql = @"select top " + pageSize + @" orderNo, taobaoId , receiveOrderPerson, CONVERT(varchar(100), orderDate, 23) as orderDate, CONVERT(varchar(100), deliveryDate, 23) as deliveryDate, material,
+                                size, carveStyle , color , deliveryCompany , deliveryPayType , deliveryPackage, orderName,
+                                address, memo  from t_order where " + where + " and id not in (select top " + skipCount + @" id from t_order
+                          where " + where + @" order by deliveryDate) order by deliveryDate, orderNo";
+
+            logger.Debug(sql);
+
+            QueryResult result = new QueryResult();
+
+            List<Order> orders = new List<Order>();
+
+            logger.Debug("startDate = " + startDate + ", endDate = " + endDate);
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                orders = conn.Query<Order>(sql).AsList();
+                result.orders = orders;
+                if (orders.Count == 0)
+                    return result;
+
+                string orderNoSum = "";
+                foreach (Order order in orders)
+                {
+                    orderNoSum = orderNoSum + " '" + order.orderNo + "',";
+                }
+                orderNoSum = orderNoSum.Substring(0, orderNoSum.Length - 1);
+
+                sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo in (" + orderNoSum + ") order by orderNo, sequence";
+
+                List<FlowStatus> statusList = conn.Query<FlowStatus>(sql).AsList();
+                foreach (Order order in orders)
+                {
+                    List<FlowStatus> list = new List<FlowStatus>();
+                    foreach(FlowStatus status in statusList)
+                    {
+                        if (order.orderNo == status.orderNo)
+                        {
+                            list.Add(status);
+                        }
+                    }
+                    order.flow = new Flow(list);
+                }
+
+                sql = "select count(*) from t_order where " + where;
+                result.totalCount = conn.QuerySingle<int>(sql);
+            }
+
+            return result;
+        }
+
+
+        public Order getOrder(string orderNo)
+        {
+
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"select id, orderNo, taobaoId, receiveOrderPerson, CONVERT(varchar(100), orderDate, 23) as orderDate, CONVERT(varchar(100), deliveryDate, 23) as deliveryDate,
+                               material, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, style, isDuban,
+                               memo, amount, orderName from t_order where orderNo = @orderNo and flag = 0 ";
+                Order order = conn.QueryFirstOrDefault<Order>(sql, new { orderNo = orderNo });
+                if (order == null)
+                {
+                    return order;
+                }
+                //加载图片
+                sql = "select imageUrl from t_order_img where orderNo = @orderNo and type = 'content' order by addtime";
+                List<string> urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
+                order.contentImages = urls;
+
+                sql = "select imageUrl from t_order_img where orderNo = @orderNo and type = 'template' order by addtime";
+                urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
+                order.templateImages = urls;
+
+                //加载状态
+                sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";
+
+                List<FlowStatus> statusList = conn.Query<FlowStatus>(sql).AsList();
+                List<FlowStatus> list = new List<FlowStatus>();
+                foreach (FlowStatus status in statusList)
+                {
+                    if (order.orderNo == status.orderNo)
+                    {
+                        list.Add(status);
+                    }
+                }
+                order.flow = new Flow(list);
+                return order;
+            } 
+
+        }
+
+        public bool deleteOrder(string orderNo)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"update t_order set flag = -1 where orderNo = @orderNo";
+                int count = conn.Execute(sql, new { orderNo = orderNo });
+                return count == 1;
             }
         }
 

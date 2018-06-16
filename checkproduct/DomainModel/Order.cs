@@ -25,12 +25,13 @@ namespace fengshan.DomainModel
         public String id;
         public String orderNo; //订单编号
         public String orderName;
-        public string taobaoId;
-        public string receiveOrderPerson;
+        public String taobaoId;
+        public String receiveOrderPerson;
         public Decimal amount; //金额
-        public DateTime orderDate; //下单日期
-        public DateTime deliveryDate; //发货日期
+        public String orderDate; //下单日期
+        public String deliveryDate; //发货日期
         public String material;
+        public String isDuban;
         public String size;
         public String carveStyle;
         public String color;
@@ -38,6 +39,7 @@ namespace fengshan.DomainModel
         public String deliveryPayType;
         public String deliveryPackage;
         public String address;
+        public String style;
         public int flag;
         public String memo;
         public List<string> contentImages = new List<string>();
@@ -57,11 +59,11 @@ namespace fengshan.DomainModel
 
         static Flow()
         {
-            FlowStatus status0 = new FlowStatus("雕刻");
-            FlowStatus status1 = new FlowStatus("打磨");
-            FlowStatus status2 = new FlowStatus("油漆");
-            FlowStatus status3 = new FlowStatus("描字");
-            FlowStatus status4 = new FlowStatus("发货");
+            FlowStatus status0 = new FlowStatus("雕刻", 0);
+            FlowStatus status1 = new FlowStatus("打磨", 1);
+            FlowStatus status2 = new FlowStatus("油漆", 2);
+            FlowStatus status3 = new FlowStatus("描字", 3);
+            FlowStatus status4 = new FlowStatus("发货", 4);
             DefaultFlow.statusList.Add(status0);
             DefaultFlow.statusList.Add(status1);
             DefaultFlow.statusList.Add(status2);
@@ -92,16 +94,19 @@ namespace fengshan.DomainModel
 
     public class FlowStatus
     {
+        public string orderNo;
        // public String id;
         public String name;
         public Boolean isFinished;
         public User finishUser;
         public DateTime finishDate;
+        public int sequence;
 
         public FlowStatus() { }
-        public FlowStatus(String name)
+        public FlowStatus(String name, int seq)
         {
             this.name = name;
+            this.sequence = seq;
         }
 
         public FlowStatus(FlowStatus status)
@@ -109,6 +114,6 @@ namespace fengshan.DomainModel
             this.name = status.name;
         }
 
-        public static FlowStatus FinishStatus = new FlowStatus("完成");
+        public static FlowStatus FinishStatus = new FlowStatus("完成", 10000);
     }
 }
