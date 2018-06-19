@@ -10,7 +10,8 @@ function getOrderNo() {
 }
 
 $(document).ready(() => {
-
+    $('#orderMenu').addClass('active')
+    $('#orderMenu ul').css('display', 'block')
 
     $.post("/getorderinfo.aspx", JSON.stringify({orderNo: getOrderNo()}))
      .done(function (data) {
@@ -82,7 +83,7 @@ function deleteOrder() {
             return;
         }
 
-        window.location.href = "/orders.aspx";
+        window.location.href = "orders.aspx";
 
     })
 }

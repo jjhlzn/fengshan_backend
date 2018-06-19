@@ -192,6 +192,9 @@ function searchClick() {
 }
 
 function loadOrders(queryObj) {
+    $('#orderMenu').addClass('active')
+    $('#orderMenu ul').css('display', 'block')
+
     $.post("/getorders.aspx", JSON.stringify(queryObj))
       .done(function (data) {
           //alert("下单成功");
@@ -205,6 +208,7 @@ function loadOrders(queryObj) {
                  .append($('<td>').html(order.orderName))
                  .append($('<td>').html(order.deliveryDate.substr(0, 10)))
                  .append($('<td>').html(order.orderDate.substr(0, 10)))
+                 .append($('<td>').html(order.flow.currentStatus))
                  .append($('<td>').html(order.amount))
                  .append($('<td>').html(order.receiveOrderPerson))
                  .appendTo('#tableBody');

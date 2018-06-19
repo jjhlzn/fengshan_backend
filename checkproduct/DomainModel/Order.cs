@@ -90,6 +90,20 @@ namespace fengshan.DomainModel
             }
             this.statusList = statuses;
         }
+
+        public string currentStatus = "";
+
+        public string getCurrentStatus()
+        {
+            foreach(FlowStatus status in statusList)
+            {
+                if (!status.isFinished)
+                {
+                    return status.name;
+                }
+            }
+            return "完成";
+        }
     }
 
     public class FlowStatus

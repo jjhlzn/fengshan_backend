@@ -61,7 +61,7 @@
                             <th class="column-title">订单名称 </th>
                             <th class="column-title">发货时间 </th>
                             <th class="column-title">下单时间 </th>
-                            
+                            <th class="column-title">当前进度 </th>
                             <th class="column-title">金额 </th>
                             <th class="column-title">接单人 </th>
 

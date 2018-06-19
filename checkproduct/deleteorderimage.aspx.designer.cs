@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace checkproduct
+namespace fengshan
 {
 
 
-    public partial class checkproduct
+    public partial class deleteorderimage
     {
 
         /// <summary>

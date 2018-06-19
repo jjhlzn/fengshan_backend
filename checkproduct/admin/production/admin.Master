@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> 东阳风尚订单系统 </title>
+    <title> 东阳尚方订单系统 </title>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -22,7 +22,7 @@
             <div class="col-md-3 left_col">
               <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>东阳风尚装饰</span></a>
+                  <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>东阳尚方装饰</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -46,7 +46,7 @@
                   <div class="menu_section">
                
                     <ul class="nav side-menu">
-                      <li><a><i class="fa fa-home"></i> 订单 <span class="fa fa-chevron-down"></span></a>
+                      <li id="orderMenu"><a><i class="fa fa-home"></i> 订单 <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="orders.aspx">订单列表</a></li>
                           <li><a href="neworder.aspx">新增订单</a></li>
@@ -94,7 +94,7 @@
             <!-- footer content -->
             <footer>
               <div class="pull-right">
-                copyright@东阳风尚装饰有限公司
+                copyright@东阳尚方装饰有限公司
               </div>
               <div class="clearfix"></div>
             </footer>
@@ -105,5 +105,6 @@
     <asp:ContentPlaceHolder ID="JSPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
 
+    
 </body>
 </html>

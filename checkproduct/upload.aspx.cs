@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System.IO;
 using log4net;
 using System.Threading;
+using fengshan.Service;
 
 namespace checkproduct
 {
@@ -19,31 +20,39 @@ namespace checkproduct
         protected void Page_Load(object sender, EventArgs e)
         {
 
-                //Thread.Sleep(500);
+            //Thread.Sleep(500);
 
-                String[] paths = new String[Request.Files.Count];
-                string[] originNames = new String[Request.Files.Count];
+            String[] paths = new String[Request.Files.Count];
+            string[] originNames = new String[Request.Files.Count];
 
-                logger.Debug(Request.Files);
+            string orderNo = Request.Form["orderNo"];
+            string type = Request.Form["type"];
+            logger.Debug("orderNo = " + orderNo);
 
-                int i = 0;
-                foreach (String fileName in Request.Files)
-                {
-                    paths[i] = uploadImage(Request.Files[fileName]);
-                    originNames[i] = fileName;
-                    i++;
+            logger.Debug(Request.Files);
+
+            int i = 0;
+            foreach (String fileName in Request.Files)
+            {
+                paths[i] = uploadImage(Request.Files[fileName]);
+                originNames[i] = fileName;
                 
-                }
-
-                var resp = new
+                if (!string.IsNullOrEmpty(orderNo))
                 {
-                    status = 0,
-                    errorMessage = "",
-                    orginNames = originNames,
-                    fileNames = paths
-                };
-                Response.Write(JsonConvert.SerializeObject(resp));
-                Response.End();
+                    new OrderService().addOrderImage(orderNo, paths[i], type);
+                }
+                i++;
+            }
+
+            var resp = new
+            {
+                status = 0,
+                errorMessage = "",
+                orginNames = originNames,
+                fileNames = paths
+            };
+            Response.Write(JsonConvert.SerializeObject(resp));
+            Response.End();
             
             
         }

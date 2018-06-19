@@ -43,7 +43,7 @@
 
                      <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
                         <button class="btn btn-success " onclick="alert('未实现');return false;">打印</button>
-                        <button class="btn btn-danger " onclick="alert('未实现');return false;">删除</button>
+                        <button class="btn btn-danger " onclick="deleteOrderClick()">删除</button>
                     </div>
 
 
@@ -142,7 +142,7 @@
 
 
       
-          </div>
+       </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="JSPlaceHolder" runat="server">
                <!-- jQuery -->
@@ -177,11 +177,13 @@
     <!-- starrr -->
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+   
     <script src="../My97DatePicker/WdatePicker.js"></script>
 
     <script src="./js/lodash.js"></script>
      <script src="./js/order.js"></script>
+
+     <script src="../build/js/custom.min.js"></script>
 </asp:Content>
 
 

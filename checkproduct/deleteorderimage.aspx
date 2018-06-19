@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="getproducts.aspx.cs" Inherits="checkproduct.getproducts" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="deleteorderimage.aspx.cs" Inherits="fengshan.deleteorderimage" %>
 
 <!DOCTYPE html>
 

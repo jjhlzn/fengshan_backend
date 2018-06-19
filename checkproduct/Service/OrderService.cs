@@ -83,7 +83,7 @@ namespace fengshan.Service
                                 size + carveStyle + color + deliveryCompany +deliveryPayType +deliveryPackage + 
                                 address + memo";
 
-            string where = " deliveryDate between '" + startDate+"' and '" + endDate+"'  and  " + orderSum + " like '%" +keyword + "%' and flag = 0 ";
+            string where = " deliveryDate between '" + startDate + "' and '" + endDate + "'  and  " + orderSum + " like '%" + keyword + "%' and flag = 0 ";
 
             int skipCount = pageNo * pageSize;
 
@@ -119,7 +119,7 @@ namespace fengshan.Service
                 foreach (Order order in orders)
                 {
                     List<FlowStatus> list = new List<FlowStatus>();
-                    foreach(FlowStatus status in statusList)
+                    foreach (FlowStatus status in statusList)
                     {
                         if (order.orderNo == status.orderNo)
                         {
@@ -131,6 +131,11 @@ namespace fengshan.Service
 
                 sql = "select count(*) from t_order where " + where;
                 result.totalCount = conn.QuerySingle<int>(sql);
+            }
+
+            foreach (Order order in result.orders)
+            {
+                order.flow.currentStatus = order.flow.getCurrentStatus();
             }
 
             return result;
@@ -159,6 +164,10 @@ namespace fengshan.Service
                 urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
                 order.templateImages = urls;
 
+                sql = "select imageUrl from t_order_img where orderNo = @orderNo and type = 'other' order by addtime";
+                urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
+                order.otherImages = urls;
+
                 //加载状态
                 sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";
 
@@ -172,6 +181,7 @@ namespace fengshan.Service
                     }
                 }
                 order.flow = new Flow(list);
+                order.flow.currentStatus = order.flow.getCurrentStatus();
                 return order;
             } 
 
@@ -183,6 +193,58 @@ namespace fengshan.Service
             {
                 string sql = @"update t_order set flag = -1 where orderNo = @orderNo";
                 int count = conn.Execute(sql, new { orderNo = orderNo });
+                return count == 1;
+            }
+        }
+
+        public bool setOrderFlowStatus(string orderNo, string statusName, bool isFinished)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = @statusName";
+                logger.Debug(sql);
+                int count = conn.Execute(sql, new { orderNo = orderNo, statusName = statusName, isFinished = isFinished, handleTime = DateTime.Now });
+                logger.Debug("count = " + count);
+                if (count >= 1)
+                {
+                    sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";
+                    List<FlowStatus> statusList = conn.Query<FlowStatus>(sql).AsList();
+                    bool isOrderFinished = true;
+                    foreach (FlowStatus status in statusList)
+                    {
+                        if (status.name != "完成")
+                        {
+                            isOrderFinished = isOrderFinished && status.isFinished;
+                        }
+                    }
+                    sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = '完成'";
+                    count = conn.Execute(sql, new { orderNo = orderNo, isFinished = isFinished, handleTime = DateTime.Now });
+                    return count >= 1;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool addOrderImage(string orderNo, string imageName, string type)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"insert into t_order_img (id, orderNo, type, imageurl) values (@id, @orderNo, @type, @imageUrl)";
+                int count = conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = orderNo, type = type, imageUrl = imageName });
+                return count == 1;
+            }
+        }
+
+
+        public bool deleteOrderImage(string orderNo, string imageName, string type)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"delete from t_order_img where orderNo = @orderNo and imageUrl = @imageUrl and type = @type";
+                int count = conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = orderNo, type = type, imageUrl = imageName });
                 return count == 1;
             }
         }

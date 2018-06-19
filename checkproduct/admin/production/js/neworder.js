@@ -82,7 +82,8 @@ function checkForm(order) {
 }
 
 $(function () {
-
+    $('#orderMenu').addClass('active')
+    $('#orderMenu ul').css('display', 'block')
 
     // Now that the DOM is fully loaded, create the dropzone, and setup the
     // event listeners

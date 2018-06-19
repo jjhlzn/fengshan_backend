@@ -4,32 +4,40 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Newtonsoft.Json;
 using System.IO;
 using log4net;
+using Newtonsoft.Json;
 using fengshan.Service;
 
 namespace fengshan
 {
-    class SetStatusRequest {
-        public string orderNo = "";
-        public string statusName = "";
-        public bool isFinished = false;
+    class DeleteImageRequest
+    {
+        public string orderNo;
+        public string imageUrl;
+        public string type;
     }
 
-    public partial class setflowstatus : System.Web.UI.Page
+    public partial class deleteorderimage : System.Web.UI.Page
     {
-        private ILog logger = LogManager.GetLogger(typeof(setflowstatus));
+        private ILog logger = LogManager.GetLogger(typeof(deleteorderimage));
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string json = Request.Params["req"];
             Stream req = Request.InputStream;
             req.Seek(0, System.IO.SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
             logger.Debug(json);
-            SetStatusRequest request = JsonConvert.DeserializeObject<SetStatusRequest>(json);
+            DeleteImageRequest request = JsonConvert.DeserializeObject<DeleteImageRequest>(json);
 
-            bool result = new OrderService().setOrderFlowStatus(request.orderNo, request.statusName, request.isFinished);
+            bool result = false;
+            Uri uri = new Uri(request.imageUrl);
+
+            var filename = uri.Segments.Last();
+            logger.Debug(filename);
+            result = new OrderService().deleteOrderImage(request.orderNo, filename, request.type);
+            
 
             var resp = new
             {

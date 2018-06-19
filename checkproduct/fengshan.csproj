@@ -121,6 +121,7 @@
     <Content Include="admin\production\chartjs2.html" />
     <Content Include="admin\production\contacts.html" />
     <Content Include="admin\production\css\dropzone.css" />
+    <Content Include="admin\production\css\login.css" />
     <Content Include="admin\production\css\maps\jquery-jvectormap-2.0.3.css" />
     <Content Include="admin\production\css\order.css" />
     <Content Include="admin\production\css\neworder.css" />
@@ -164,12 +165,14 @@
     <Content Include="admin\production\js\datepicker\daterangepicker.js" />
     <Content Include="admin\production\js\dropzone.js" />
     <Content Include="admin\production\js\lodash.js" />
+    <Content Include="admin\production\js\login.js" />
     <Content Include="admin\production\js\moment\moment.min.js" />
     <Content Include="admin\production\js\neworder.js" />
     <Content Include="admin\production\js\order.js" />
     <Content Include="admin\production\js\orders.js" />
     <Content Include="admin\production\js\pagination.min.js" />
     <Content Include="admin\production\level2.html" />
+    <Content Include="admin\production\login.aspx" />
     <Content Include="admin\production\login.html" />
     <Content Include="admin\production\map.html" />
     <Content Include="admin\production\media_gallery.html" />
@@ -3555,12 +3558,10 @@
     <Content Include="admin\vendors\validator\index.html" />
     <Content Include="admin\vendors\validator\multifield.js" />
     <Content Include="admin\vendors\validator\validator.js" />
-    <Content Include="checkproduct.aspx" />
     <Content Include="deleteorder.aspx" />
+    <Content Include="deleteorderimage.aspx" />
     <Content Include="getorderinfo.aspx" />
     <Content Include="getorders.aspx" />
-    <Content Include="getcheckorders.aspx" />
-    <Content Include="getproducts.aspx" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="login.aspx" />
@@ -3577,6 +3578,13 @@
     </Compile>
     <Compile Include="admin\production\admin.Master.designer.cs">
       <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\production\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\production\order.aspx.cs">
       <DependentUpon>order.aspx</DependentUpon>
@@ -3605,6 +3613,12 @@
     <Compile Include="deleteorder.aspx.designer.cs">
       <DependentUpon>deleteorder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="deleteorderimage.aspx.cs">
+      <DependentUpon>deleteorderimage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="deleteorderimage.aspx.designer.cs">
+      <DependentUpon>deleteorderimage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DomainModel\Order.cs" />
     <Compile Include="getorderinfo.aspx.cs">
       <DependentUpon>getorderinfo.aspx</DependentUpon>
@@ -3623,28 +3637,10 @@
       <DependentUpon>neworder.aspx</DependentUpon>
     </Compile>
     <Compile Include="other\BasePage.cs" />
-    <Compile Include="checkproduct.aspx.cs">
-      <DependentUpon>checkproduct.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="checkproduct.aspx.designer.cs">
-      <DependentUpon>checkproduct.aspx</DependentUpon>
-    </Compile>
     <Compile Include="other\ConnectionFactory.cs" />
     <Compile Include="DomainModel\CheckOrder.cs" />
     <Compile Include="DomainModel\PageInfo.cs" />
     <Compile Include="DomainModel\User.cs" />
-    <Compile Include="getcheckorders.aspx.cs">
-      <DependentUpon>getcheckorders.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="getproducts.aspx.cs">
-      <DependentUpon>getproducts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="getproducts.aspx.designer.cs">
-      <DependentUpon>getproducts.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3654,13 +3650,13 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="other\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\CheckOrderService.cs" />
     <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="setflowstatus.aspx.cs">
       <DependentUpon>setflowstatus.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="setflowstatus.aspx.designer.cs">
       <DependentUpon>setflowstatus.aspx</DependentUpon>

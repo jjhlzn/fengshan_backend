@@ -8,11 +8,13 @@ using Newtonsoft.Json;
 using log4net;
 using Dapper;
 using checkproduct.DomainModel;
-using checkproduct.Service;
+using fengshan.Service;
+using System.IO;
+using fengshan.other;
 
 namespace checkproduct
 {
-    public class LoginRequest : BaseRequest
+    public class LoginRequest
     {
         public string a
         {
@@ -27,25 +29,35 @@ namespace checkproduct
         }
     }
 
-    public partial class login : BasePage<LoginRequest>
+    public partial class login : System.Web.UI.Page
     {
         private UserService userService = new UserService();
 
         private ILog logger = LogManager.GetLogger(typeof(login));
 
-        protected override Object handle(LoginRequest req)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            User user = new User();
-            user.name = "金军航";
+            Stream req = Request.InputStream;
+            req.Seek(0, System.IO.SeekOrigin.Begin);
+            string json = new StreamReader(req).ReadToEnd();
+            logger.Debug(json);
+            LoginRequest request = JsonConvert.DeserializeObject<LoginRequest>(json);
+
+            User user = null;
 
             int status = 0;
             string errorMessage = "";
+
+            user = userService.Login(request.a, request.b);
             
             if (user == null)
             {
                 status = -1;
                 errorMessage = "用户名或密码错误";
-            } 
+            } else
+            {
+                Session[Utils.SESSION_USER] = user;
+            }
 
             var resp = new
             {
@@ -54,7 +66,8 @@ namespace checkproduct
                 user = user
             };
 
-            return resp;
+            Response.Write(JsonConvert.SerializeObject(resp));
+            Response.End();
 
         }
 
