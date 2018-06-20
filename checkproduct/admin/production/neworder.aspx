@@ -219,7 +219,9 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            <form action="/upload.aspx"
                               class="dropzone dz-message"
-                              id="my-awesome-dropzone"></form>
+                              id="my-awesome-dropzone"></form> 
+                            
+                            <input type="radio" name="pastePosition" checked="checked" id="contentRadio"> 图片复制到此处
                         </div>
                      </div>
 
@@ -228,7 +230,8 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            <form action="/upload.aspx"
                               class="dropzone"
-                              id="my-awesome-dropzone2"></form>
+                              id="my-awesome-dropzone2"></form> 
+                             <input type="radio" name="pastePosition" id="templateRadio" > 图片复制到此处
                         </div>
                      </div>
                    

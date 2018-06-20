@@ -50,6 +50,7 @@
                         <ul class="nav child_menu">
                           <li><a href="orders.aspx">订单列表</a></li>
                           <li><a href="neworder.aspx">新增订单</a></li>
+                          <li><a href="support.aspx">技术支持</a></li>
                         </ul>
                       </li>
             

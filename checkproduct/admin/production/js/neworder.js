@@ -117,13 +117,23 @@ $(function () {
     // event listeners
     Dropzone.autoDiscover = false;
 
+    Dropzone.options.myAwesomeDropzone = {
+        addRemoveLinks: true,
 
+    };
 
-    //var myDropzone = $("#my-awesome-dropzone");
     myDropzone = new Dropzone("#my-awesome-dropzone");
-    console.log(myDropzone);
+    
 
-
+    $("input[type='radio']").click(function () {
+        $(this).attr('checked', 'checked');
+        let self = this;
+        $("input[type='radio']").each(function (item) {
+            if (this.id != self.id) {
+                $(this).attr('checked', null);
+            }
+        });
+    });
 
     myDropzone.on("success", function (file, resp) {
         /* Maybe display some more file information on your page */
@@ -133,8 +143,11 @@ $(function () {
         }
     });
 
+    Dropzone.options.myAwesomeDropzone = {
+        addRemoveLinks: true,
 
-    myDropzone2 = new Dropzone("#my-awesome-dropzone2");
+    };
+    myDropzone2 = new Dropzone("#my-awesome-dropzone2", { addRemoveLinks: true, });
     myDropzone2.on("success", function (file, resp) {
         /* Maybe display some more file information on your page */
         let json = JSON.parse(resp);
@@ -142,4 +155,20 @@ $(function () {
             yanbanImgs.push(json.fileNames[0]);
         }
     });
+
+    document.onpaste = function (event) {
+        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        for (index in items) {
+            var item = items[index];
+            if (item.kind === 'file') {
+                // adds the file to your dropzone instance
+                if ($('#contentRadio').attr('checked')) {
+                    myDropzone.addFile(item.getAsFile())
+                } else {
+                    myDropzone2.addFile(item.getAsFile())
+                }
+               
+            }
+        }
+    }
 })

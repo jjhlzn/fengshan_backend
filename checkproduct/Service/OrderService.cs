@@ -81,7 +81,7 @@ namespace fengshan.Service
         {
             string orderSum = @"orderNo + taobaoId + receiveOrderPerson  +material +
                                 size + carveStyle + color + deliveryCompany +deliveryPayType +deliveryPackage + 
-                                address + memo";
+                                address + memo + orderName";
 
             string where = " deliveryDate between '" + startDate + "' and '" + endDate + "'  and  " + orderSum + " like '%" + keyword + "%' and flag = 0 ";
 
