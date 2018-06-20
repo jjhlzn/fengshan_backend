@@ -224,7 +224,7 @@
                      </div>
 
                     <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">内容图片</label>
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">底色样板图片</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            <form action="/upload.aspx"
                               class="dropzone"

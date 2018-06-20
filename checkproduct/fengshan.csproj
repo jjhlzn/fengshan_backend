@@ -126,6 +126,7 @@
     <Content Include="admin\production\css\order.css" />
     <Content Include="admin\production\css\neworder.css" />
     <Content Include="admin\production\css\orders.css" />
+    <Content Include="admin\production\css\print.min.css" />
     <Content Include="admin\production\echarts.html" />
     <Content Include="admin\production\e_commerce.html" />
     <Content Include="admin\production\fixed_footer.html" />
@@ -172,6 +173,7 @@
     <Content Include="admin\production\js\order.js" />
     <Content Include="admin\production\js\orders.js" />
     <Content Include="admin\production\js\pagination.min.js" />
+    <Content Include="admin\production\js\print.min.js" />
     <Content Include="admin\production\level2.html" />
     <Content Include="admin\production\login.aspx" />
     <Content Include="admin\production\login.html" />

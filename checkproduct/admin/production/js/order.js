@@ -9,6 +9,19 @@ function getOrderNo() {
     return orderNo;
 }
 
+function setPrintTable(order) {
+    var string = "taobaoId,receiveOrderPerson, orderDate, deliveryDate, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, memo, amount, orderName,style";
+    var properties = string.split(",");
+    properties.forEach(function (prop) {
+        $('#' + _.trim(prop) + '2').html(order[_.trim(prop)]);
+    })
+
+    $('#orderName3').html(order.orderName)
+    $('#material2').html(order['material'] + ' &nbsp;&nbsp;  ' + order['isDuban']);
+
+    $('#delivery2').html(order.deliveryCompany + ' - ' + order.deliveryPayType + ' - ' + order.deliveryPackage);
+} 
+
 $(document).ready(function(){
     $('#orderMenu').addClass('active')
     $('#orderMenu ul').css('display', 'block')
@@ -29,6 +42,8 @@ $(document).ready(function(){
          properties.forEach(function (prop) {
              $('#' + _.trim(prop)).html(order[_.trim(prop)]);
          })
+
+         setPrintTable(order)
 
          $('#material').html(order['material'] + ' &nbsp;&nbsp;  ' +order['isDuban']);
 
@@ -90,4 +105,13 @@ function deleteOrder() {
         window.location.href = "orders.aspx";
 
     })
+}
+
+function printClick() {
+   
+    //
+    var dom = $('#printDiv');
+    dom.show()
+    printJS({ printable: 'printDiv', type: 'html', css: './css/order.css' })
+    dom.hide();
 }

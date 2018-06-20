@@ -49,3 +49,32 @@ tr {
 .progressTable td {
     border: none;
 }
+
+
+
+#printDiv {
+    color: black;
+}
+
+#printDiv .printOrderName {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+#printDiv table tr {
+    height: 70px;
+}
+
+#printDiv .addressLine {
+    height: 140px;
+}
+
+.hidden-div {
+    display: none;
+}
+
+.size-print {
+    font-size: 20px;
+    font-weight: bold;
+}
