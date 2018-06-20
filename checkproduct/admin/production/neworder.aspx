@@ -57,8 +57,16 @@
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select id="receiveOrderPerson" required="" data-parsley-errors-messages-disabled="" class="select2_single form-control" tabindex="-1">
                             <option value="">选择接单人</option>
-                            <option value="张三">张三</option>
-                            <option value="李四">李四</option>
+                            <option value="小刘">小刘</option>
+                            <option value="小王">小王</option>
+                            <option value="小潘">小潘</option>
+                              <option value="小金">小金</option>
+                              <option value="小陆">小陆</option>
+                              <option value="小胡">小胡</option>
+                              <option value="金鹏">金鹏</option>
+                              <option value="胡亚非">胡亚非</option>
+                               <option value="金国平">金国平</option>
+
                           </select>
                         </div>
                       </div>
@@ -210,7 +218,7 @@
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">内容图片</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            <form action="/upload.aspx"
-                              class="dropzone"
+                              class="dropzone dz-message"
                               id="my-awesome-dropzone"></form>
                         </div>
                      </div>

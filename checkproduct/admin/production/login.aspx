@@ -15,7 +15,7 @@
 
     	<input id="username" type="text" name="u" placeholder="用户名" required="" data-parsley-errors-messages-disabled="" />
         <input id="password" type="password" name="p" placeholder="密码" required="" data-parsley-errors-messages-disabled=""/>
-        <button type="submit" class="btn btn-primary btn-block btn-large" onclick="submitForm();">登录</button>
+        <button type="submit" class="btn btn-primary btn-block btn-large" onclick="submitForm();return false;">登录</button>
         </div>
     </form>
 

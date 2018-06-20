@@ -218,7 +218,7 @@ namespace fengshan.Service
                         }
                     }
                     sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = '完成'";
-                    count = conn.Execute(sql, new { orderNo = orderNo, isFinished = isFinished, handleTime = DateTime.Now });
+                    count = conn.Execute(sql, new { orderNo = orderNo, isFinished = isOrderFinished, handleTime = DateTime.Now });
                     return count >= 1;
                 }
                 else

@@ -1,9 +1,36 @@
 ﻿var contentImgs = [];
 var yanbanImgs = [];
+var myDropzone;
+var myDropzone2;
+
+function resetForm() {
+    $('#taobaoId').val('');
+    $('#receiveOrderPerson').val('');
+    $('#orderName').val('');
+    $('#amount').val('');
+    $('#orderDate').val('');
+    $('#deliveryDate').val('');
+    $('#material').val('');
+    $('#isDuban').val('');
+    $('#style').val('');
+    $('#size').val('');
+    $('#carveStyle').val('');
+    $('#color').val('');
+    $('#deliveryCompany').val('');
+    $('#deliveryPayType').val('');
+    $('#deliveryPackage').val('');
+    $('#address').val('');
+    $('#memo').val('');
+    contentImgs = [];
+    yanbanImgs = [];
+
+    myDropzone.removeAllFiles(true)
+    myDropzone2.removeAllFiles(true)
+}
 
 function submitForm() {
     var validateResult = true;
-    $('#formdiv :input:not(:button)').parsley().forEach(item => {
+    $('#formdiv :input:not(:button)').parsley().forEach(function(item) {
         if (item.validate) {
             validateResult = validateResult && (item.validate() === true);
         }
@@ -49,6 +76,7 @@ function submitForm() {
           var result = JSON.parse(data);
           if (result.status == 0) {
               alert("下单成功");
+              resetForm();
           } else {
               alert("下单失败");
           }
@@ -84,13 +112,18 @@ function checkForm(order) {
 $(function () {
     $('#orderMenu').addClass('active')
     $('#orderMenu ul').css('display', 'block')
-
+    
     // Now that the DOM is fully loaded, create the dropzone, and setup the
     // event listeners
     Dropzone.autoDiscover = false;
+
+
+
     //var myDropzone = $("#my-awesome-dropzone");
-    var myDropzone = new Dropzone("#my-awesome-dropzone");
+    myDropzone = new Dropzone("#my-awesome-dropzone");
     console.log(myDropzone);
+
+
 
     myDropzone.on("success", function (file, resp) {
         /* Maybe display some more file information on your page */
@@ -101,7 +134,7 @@ $(function () {
     });
 
 
-    var myDropzone2 = new Dropzone("#my-awesome-dropzone2");
+    myDropzone2 = new Dropzone("#my-awesome-dropzone2");
     myDropzone2.on("success", function (file, resp) {
         /* Maybe display some more file information on your page */
         let json = JSON.parse(resp);

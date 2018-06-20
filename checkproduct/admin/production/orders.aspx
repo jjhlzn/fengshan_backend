@@ -65,12 +65,12 @@
                             <th class="column-title">金额 </th>
                             <th class="column-title">接单人 </th>
 
-                              <!--
+                              
                             <th class="column-title no-link last"><span class="nobr"></span>
                             </th>
                             <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th> -->
+                              <a class="antoo" style="color:#fff; font-weight:500;">操作 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th> 
                           </tr>
                         </thead>
 
@@ -89,124 +89,7 @@
                             <td class=" last"><a href="#">View</a>
                             </td>
                           </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                           <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">2018-10-01</td>
-                            <td class=" ">2018-10-01 </td>
-                            <td class=" ">牌匾</td>
-                            <td class=" ">100元</td>
-                            <td class="a-right a-right ">小张</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr> -->
+                            -->
                         </tbody>
                       </table>
                     </div>

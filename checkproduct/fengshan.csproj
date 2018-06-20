@@ -166,6 +166,7 @@
     <Content Include="admin\production\js\dropzone.js" />
     <Content Include="admin\production\js\lodash.js" />
     <Content Include="admin\production\js\login.js" />
+    <Content Include="admin\production\js\master.js" />
     <Content Include="admin\production\js\moment\moment.min.js" />
     <Content Include="admin\production\js\neworder.js" />
     <Content Include="admin\production\js\order.js" />
@@ -3565,6 +3566,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="login.aspx" />
+    <Content Include="logoutpc.aspx" />
     <Content Include="neworder.aspx" />
     <Content Include="setflowstatus.aspx" />
     <Content Include="test.aspx" />
@@ -3628,6 +3630,13 @@
     </Compile>
     <Compile Include="getorders.aspx.cs">
       <DependentUpon>getorders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logoutpc.aspx.cs">
+      <DependentUpon>logoutpc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logoutpc.aspx.designer.cs">
+      <DependentUpon>logoutpc.aspx</DependentUpon>
     </Compile>
     <Compile Include="neworder.aspx.cs">
       <DependentUpon>neworder.aspx</DependentUpon>

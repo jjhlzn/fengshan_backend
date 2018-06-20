@@ -4,7 +4,7 @@
      <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
@@ -34,20 +34,33 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>订单信息 <small></small></h2>
-              
+                    <div class="nav navbar-right panel_toolbox">
+                            <button class="btn btn-success " onclick="alert('未实现');return false;">打印</button>
+                            <button class="btn btn-danger " onclick="deleteOrderClick(); return false;">删除</button>
+                    </div>
                     <div class="clearfix"></div>
                   </div>
+                   <div class="row" style="margin: auto;">
 
+                            
+                
+                   </div>
                   <div class="x_content ordercontent " >
-                    <br />
+                    
 
-                     <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
-                        <button class="btn btn-success " onclick="alert('未实现');return false;">打印</button>
-                        <button class="btn btn-danger " onclick="deleteOrderClick()">删除</button>
-                    </div>
-
-
-                    <table style="width: 72%; margin: auto">
+                     
+                    <table style="width: 70%; margin: auto"  class="progressTable">
+                        <tr>
+                            <td>
+                                  <table class="progressTable" style="margin-left: -25px;" >
+                                           <tr id="progressRow">
+                                      
+                                           </tr>
+                                  </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 70%; margin: auto">
                         <tr>
                             <td style="width: 11%; text-align: center">淘宝ID：</td>
                             <td id="taobaoId"> </td>
@@ -102,13 +115,9 @@
                         </tr>
                         <tr >
                             <td style="width: 11%; text-align: center">进度：</td>
-                            <td  colspan="3" style="width: 89%;" id="progress">
+                            <td colspan="3" style="" id="progress">
 
-                               <table class="progressTable">
-                                   <tr id="progressRow">
-                                       
-                                   </tr>
-                               </table>
+                               
                             </td>
                         </tr>
                         <tr>
@@ -130,6 +139,18 @@
                                  
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="imagerow"> 
+                                <div style="width: 100%; height: 100%;">
+                                    &nbsp; &nbsp; &nbsp;进度图片：
+                                    <div style="width: 100%; height: 100%;" id="otherImagesDiv">
+                                        </div>
+                                    
+                                   
+                                </div>
+                            </td>
+                            
                         </tr>
                     </table>
 

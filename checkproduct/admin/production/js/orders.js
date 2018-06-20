@@ -202,15 +202,16 @@ function loadOrders(queryObj) {
           var result = JSON.parse(data);
           var items = JSON.parse(data).items;
           $('#tableBody').html('')
-          items.forEach(order => {
-              $('<tr>', { "class": "pointer", "onclick": "clickItem('"+ order.orderNo+"')" })
-                 .append($('<td>').html(order.orderNo))
+          items.forEach( function(order) {
+              $('<tr>', { "class": "pointer" })
+                 .append($('<td>').append($('<a>', {'href': "order.aspx?orderNo=" + order.orderNo}).html(order.orderNo)))
                  .append($('<td>').html(order.orderName))
                  .append($('<td>').html(order.deliveryDate.substr(0, 10)))
                  .append($('<td>').html(order.orderDate.substr(0, 10)))
                  .append($('<td>').html(order.flow.currentStatus))
                  .append($('<td>').html(order.amount))
                  .append($('<td>').html(order.receiveOrderPerson))
+                  .append($('<td>').append($('<a>', { 'href': "order.aspx?orderNo=" + order.orderNo }).html('查看')))
                  .appendTo('#tableBody');
           })
 
