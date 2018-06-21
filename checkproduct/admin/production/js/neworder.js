@@ -26,13 +26,17 @@ function resetForm() {
 
     myDropzone.removeAllFiles(true)
     myDropzone2.removeAllFiles(true)
+
+    $('#contentRadio').attr('checked', 'checked');
+    $('#contentRadio').click()
+    $('#templateRadio').attr('checked', null);
 }
 
 function submitForm() {
     var validateResult = true;
     $('#formdiv :input:not(:button)').parsley().forEach(function(item) {
         if (item.validate) {
-            validateResult = validateResult && (item.validate() === true);
+            validateResult =  (item.validate() === true) && validateResult;
         }
     })
     if (validateResult !== true)
@@ -98,13 +102,14 @@ function checkForm(order) {
         }
     }
 
+    /*
     if (order.contentImages.length == 0) {
         return "请上传内容图片";
     }
 
     if (order.templateImages.length == 0) {
         return "请上传样板底色图片";
-    }
+    } */
 
     return "";
 }

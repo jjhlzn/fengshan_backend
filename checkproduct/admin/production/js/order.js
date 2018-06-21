@@ -110,6 +110,13 @@ function deleteOrder() {
 function printClick() {
    
     //
+    if (! (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) ) {
+        if (window.confirm("当前浏览器不能支持打印，请下载Chrome浏览器，点击确定跳转到下载页面")) {
+            window.location.href = "/admin/production/support.aspx";
+        }
+        return;
+    }
+
     var dom = $('#printDiv');
     dom.show()
     printJS({ printable: 'printDiv', type: 'html', css: './css/order.css' })

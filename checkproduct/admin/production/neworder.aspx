@@ -221,7 +221,7 @@
                               class="dropzone dz-message"
                               id="my-awesome-dropzone"></form> 
                             
-                            <input type="radio" name="pastePosition" checked="checked" id="contentRadio"> 图片复制到此处
+                            <input type="radio" name="pastePosition" checked="checked" id="contentRadio"> 复制到内容图片
                         </div>
                      </div>
 
@@ -231,7 +231,7 @@
                            <form action="/upload.aspx"
                               class="dropzone"
                               id="my-awesome-dropzone2"></form> 
-                             <input type="radio" name="pastePosition" id="templateRadio" > 图片复制到此处
+                             <input type="radio" name="pastePosition" id="templateRadio" > 复制到底色样板图片
                         </div>
                      </div>
                    
