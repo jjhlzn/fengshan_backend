@@ -39,7 +39,7 @@ namespace fengshan
             {
                 status = 0,
                 errorMessage = "",
-                totalCount = result.orders,
+                totalCount = result.totalCount,
                 pages = (result.totalCount + query.pageSize - 1) / query.pageSize,
                 items = result.orders
             };
@@ -48,29 +48,5 @@ namespace fengshan
             Response.End();
         }
 
-        private List<Order> getOrders()
-        {
-            List<Order> orders = new List<Order>();
-
-            Order order = new Order();
-            for(int i = 0; i < 10; i++)
-            {
-                orders.Add(makeOrder());
-            }
-
-            return orders;
-        }
-
-        private Order makeOrder()
-        {
-            Order order = new Order();
-            order.orderNo = "123456";
-            order.orderDate = "2018-01-01";
-            order.orderName = "牌匾";
-            order.deliveryDate = "2018-01-01";
-            order.amount = 100;
-            order.flow = new Flow(Flow.DefaultFlow);
-            return order;
-        }
     }
 }

@@ -2,6 +2,7 @@
  * Pagination
  * javascript page navigation
  * * * * * * * * * * * * * * * * */
+var pageSize = 15;
 function clickItem(orderNo) {
     window.location.href = "order.aspx?orderNo="+orderNo;
     console.log('click item')
@@ -55,7 +56,7 @@ var Pagination = {
         console.log("page click: " + Pagination.page)
         var queryObj = getQueryObj();
         queryObj.pageNo = parseInt(Pagination.page) - 1;
-        queryObj.pageSize = 10;
+        queryObj.pageSize = pageSize;
         loadOrders(queryObj);
     },
 
@@ -186,7 +187,7 @@ function getQueryObj() {
 function searchClick() {
     var queryObj = getQueryObj();
     queryObj.pageNo = 0;
-    queryObj.pageSize = 10;
+    queryObj.pageSize = pageSize;
     loadOrders(queryObj);
     return false;
 }
@@ -244,7 +245,7 @@ $(document).ready(function () {
     $('#endDate').val('2018-12-31');
     var queryObj = getQueryObj();
     queryObj.pageNo = 0;
-    queryObj.pageSize = 10;
+    queryObj.pageSize = pageSize;
     loadOrders(queryObj);
 });
 

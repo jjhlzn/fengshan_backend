@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/production/admin.Master"  AutoEventWireup="true" CodeBehind="support.aspx.cs" Inherits="fengshan.admin.production.supoort" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/production/admin.Master"  AutoEventWireup="true" CodeBehind="config.aspx.cs" Inherits="fengshan.admin.production.config" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Bootstrap -->
@@ -23,37 +24,77 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
-    <link href="./css/neworder.css" rel="stylesheet">
-
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div id="formdiv" class="right_col" role="main" data-parsley-validate="">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
      <div class="">
-        
+           
+
             <div class="clearfix"></div>
+
             <div class="row">
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>软件列表 <small></small></h2>
-              
+                    <h2><%=siteConfig.name %> <small></small></h2>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" style="height: 600px; color: orangered;">
-                    <br />
+
+                  <div class="x_content" style="height: 580px;">
+
+                     <div class="row">
+                          <table class="addTable" style="margin-left: 10px; margin-bottom: 5px;">
+                              <tr>
+                                  <td>值:</td>
+                                  <td><input id="name" class="" type="text"></td>
+
+                                  <td style="margin-left: 10px;">序号:</td>
+                                  <td><input id="sequence" class="" type="text"></td>
+                              
+                                  <td><button  class=" searchBtn" style="margin-left: 5px;" onclick="addClick(); return false;">添加</button></td>
+                              </tr>
+                          </table>
                     
-                    <a href="http://xhw.hengdianworld.com/uploads/ChromeStandaloneSetup64.exe" style="color: orangered;"> Chrome下载 </a>
+                    </div>
+                
+                    <div class="table-responsive" >
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                        
+                            <th class="column-title">值 </th>
+                             
+                            <th class="column-title">序号 </th>
+                             <th class="column-title no-link last"><span class="nobr"></span></th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">操作  <span class="action-cnt"> </span> </a>
+                            </th> 
+                          </tr>
+                        </thead>
+
+                        <tbody id="tableBody">
+                            
+                          <% foreach (fengshan.DomainModel.ConfigItem item in siteConfig.items) { %>
+                              <tr class="pointer" id="<%=item.id  %>" >
+                                <td class=" "> <%=item.name %> </td>
+                                   <td class=" "> <%=item.sequence %> </td>
+                                <td class=" last"> <a href="#" onclick="deleteClick('<%=item.id  %>'); return false;">删除</a> 
+                                </td>
+                              </tr>
+                          <% } %>
+                         
+                            
+                        </tbody>
+                      </table>
+                    </div>
+				  
+						
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-      
-          </div>
-         </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="JSPlaceHolder" runat="server">
 
@@ -83,6 +124,7 @@
     <script src="../vendors/switchery/dist/switchery.min.js"></script>
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+
     <!-- Autosize -->
     <script src="../vendors/autosize/dist/autosize.min.js"></script>
     <!-- jQuery autocomplete -->
@@ -91,10 +133,8 @@
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     
-    <script src="../My97DatePicker/WdatePicker.js"></script>
      <script src="./js/lodash.js"></script>
-
-
+     <script src="./js/config.js?id=2"></script>
 
     <script src="../build/js/custom.min.js"></script> 
 </asp:Content>

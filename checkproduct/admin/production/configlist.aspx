@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/production/admin.Master"  AutoEventWireup="true" CodeBehind="support.aspx.cs" Inherits="fengshan.admin.production.supoort" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/production/admin.Master"  AutoEventWireup="true" CodeBehind="configlist.aspx.cs" Inherits="fengshan.admin.production.configlist" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <!-- Bootstrap -->
@@ -23,37 +23,61 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 
-    <link href="./css/neworder.css" rel="stylesheet">
-
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
-    <div id="formdiv" class="right_col" role="main" data-parsley-validate="">
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
      <div class="">
-        
+           
+
             <div class="clearfix"></div>
+
             <div class="row">
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>软件列表 <small></small></h2>
-              
+                    <h2>配置列表 <small></small></h2>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content" style="height: 600px; color: orangered;">
-                    <br />
-                    
-                    <a href="http://xhw.hengdianworld.com/uploads/ChromeStandaloneSetup64.exe" style="color: orangered;"> Chrome下载 </a>
+
+                  <div class="x_content" style="height: 580px;">
+
+                
+                    <div class="table-responsive" >
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                        
+                            <th class="column-title">配置项 </th>
+                              <th class="column-title no-link last"><span class="nobr"></span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">操作  <span class="action-cnt"> </span> </a>
+                            </th> 
+                          </tr>
+                        </thead>
+
+                        <tbody id="tableBody">
+                            
+                          <% foreach (fengshan.DomainModel.Config config in fengshan.DomainModel.Config.ALL_CONFIGS) { %>
+                              <tr class="even pointer" >
+                                <td class=" "> <a href="config.aspx?code=<%= config.code %>"> <%= config.name %> </a> </td>
+                                <td class=" last"><a href="config.aspx?code=<%= config.code %>"> 修改 </a>
+                                </td>
+                              </tr>
+                          <% } %>
+                         
+                            
+                        </tbody>
+                      </table>
+                    </div>
+				  
+						
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-      
-          </div>
-         </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="JSPlaceHolder" runat="server">
 
@@ -83,6 +107,7 @@
     <script src="../vendors/switchery/dist/switchery.min.js"></script>
     <!-- Select2 -->
     <script src="../vendors/select2/dist/js/select2.full.min.js"></script>
+
     <!-- Autosize -->
     <script src="../vendors/autosize/dist/autosize.min.js"></script>
     <!-- jQuery autocomplete -->
@@ -91,9 +116,7 @@
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     
-    <script src="../My97DatePicker/WdatePicker.js"></script>
      <script src="./js/lodash.js"></script>
-
 
 
     <script src="../build/js/custom.min.js"></script> 

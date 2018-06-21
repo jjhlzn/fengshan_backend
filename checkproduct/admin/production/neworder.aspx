@@ -57,15 +57,12 @@
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select id="receiveOrderPerson" required="" data-parsley-errors-messages-disabled="" class="select2_single form-control" tabindex="-1">
                             <option value="">选择接单人</option>
-                            <option value="小刘">小刘</option>
-                            <option value="小王">小王</option>
-                            <option value="小潘">小潘</option>
-                              <option value="小金">小金</option>
-                              <option value="小陆">小陆</option>
-                              <option value="小胡">小胡</option>
-                              <option value="金鹏">金鹏</option>
-                              <option value="胡亚非">胡亚非</option>
-                               <option value="金国平">金国平</option>
+                              <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.JDR.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
+                            
+                          
 
                           </select>
                         </div>
@@ -90,13 +87,13 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">接单时间</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input id="orderDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled=""
+                          <input id="orderDate" class="form-control col-md-3 col-xs-12" type="text"  required="" data-parsley-errors-messages-disabled=""
                               onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})">
                         </div>
 
                         <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-4">发货时间</label>
                         <div class="col-md-2 col-sm-2 col-xs-4">
-                          <input id="deliveryDate" class="form-control col-md-3 col-xs-12" type="text" name="middle-name"  required="" data-parsley-errors-messages-disabled=""
+                          <input id="deliveryDate" class="form-control col-md-3 col-xs-12" type="text"   required="" data-parsley-errors-messages-disabled=""
                               onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})">
                         </div>
                       </div>
@@ -107,10 +104,10 @@
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="style" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择款式</option>
-                            <option value="规则">规则</option>
-                            <option value="不规则">不规则</option>
-                              <option value="圆">圆</option>
-                            <option value="其他">其他</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.KS.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
 
                           </select>
                         </div>
@@ -119,12 +116,10 @@
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="carveStyle" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择雕刻方式</option>
-                            <option value="阴包阳">阴包阳</option>
-                            <option value="圆弧阴雕">圆弧阴雕</option>
-                              <option value="直角阴雕">直角阴雕</option>
-                              <option value="圆弧阴雕">圆弧阴雕</option>
-                              <option value="直角阳雕">直角阳雕</option>
-                              <option value="其他">其他</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.DKFS.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
                       </div>
@@ -134,21 +129,20 @@
                         <div class="col-md-2 col-sm-4 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="material" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择材质</option> 
-                            <option value="樟子松">樟子松</option>
-                            <option value="红松">红松</option>
-                            <option value="香樟木">香樟木</option>
-                            <option value="榆木">榆木</option>
-                            <option value="菠萝格">菠萝格</option>
-                            <option value="红花梨">红花梨</option>
-                            <option value="其他">其他</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.CZ.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
 
                         <div class="col-md-2 col-sm-2 col-xs-2">
                           <select class="select2_single form-control" tabindex="-1" id="isDuban" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择是否独板</option> 
-                            <option value="独板">独板</option>
-                            <option value="不是独板">不是独板</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.CZDB.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
                       </div>
@@ -156,7 +150,7 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">尺寸</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="size" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled="">
+                          <input id="size" class="form-control col-md-7 col-xs-12" type="text" required="" data-parsley-errors-messages-disabled="">
                         </div>
                       </div>
 
@@ -165,7 +159,7 @@
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">颜色</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="color" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" required="" data-parsley-errors-messages-disabled="">
+                          <input id="color" class="form-control col-md-7 col-xs-12" type="text" required="" data-parsley-errors-messages-disabled="">
                         </div>
                       </div>
 
@@ -174,29 +168,28 @@
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="deliveryCompany" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择物流</option>
-                            <option value="顺丰">顺丰</option>
-                            <option value="德邦快递">德邦快递</option>
-                              <option value="德邦物流电商冲减">德邦物流电商冲减</option>
-                              <option value="德邦物流普通自提">德邦物流普通自提</option>
-                              <option value="中通物流">中通物流</option>
-                              <option value="百世物流">百世物流</option>
-                              <option value="安能物流">安能物流</option>
-                              <option value="专线托运">专线托运</option>
-                              <option value="其他">其他</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.WLGS.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
                          <div class="col-md-2 col-sm-2 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="deliveryPayType" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择支付方式</option>
-                            <option value="包邮">包邮</option>
-                            <option value="到付">到付</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.WLZFFS.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-4">
                           <select class="select2_single form-control" tabindex="-1" id="deliveryPackage" required="" data-parsley-errors-messages-disabled="">
                             <option value="">选择打包方式</option>
-                            <option value="打木架">打木架</option>
-                            <option value="不打木架">不打木架</option>
+                            <% foreach (fengshan.DomainModel.ConfigItem item in fengshan.DomainModel.Config.WLDBFS.items)
+                                  { %>
+                                <option value="<%= item.value %>"><%= item.name %></option>
+                              <% } %>
                           </select>
                         </div>
                       </div>
@@ -210,7 +203,7 @@
                      <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">备注</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                           <textarea id="meno" class="form-control" rows="2" placeholder='输入备注'></textarea>
+                           <textarea id="memo" class="form-control" rows="2" placeholder='输入备注'></textarea>
                         </div>
                      </div>
 
@@ -300,7 +293,7 @@
 
 
      <script src="./js/dropzone.js"></script>
-     <script src="./js/neworder.js"></script>
+     <script src="./js/neworder.js?id=1"></script>
 
     <script src="../build/js/custom.min.js"></script> 
 </asp:Content>

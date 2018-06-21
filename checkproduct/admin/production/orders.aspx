@@ -99,7 +99,7 @@
                 </div>
               </div>
             </div>
-          </div>
+    </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="JSPlaceHolder" runat="server">
             <!-- jQuery -->
@@ -116,7 +116,7 @@
      <script src="./js/lodash.js"></script>
 
 
-        <script src="./js/orders.js"></script>
+        <script src="./js/orders.js?id=2"></script>
 
     <!-- Custom Theme Scripts -->
 

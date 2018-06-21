@@ -121,7 +121,10 @@
                             <td style="width: 11%; text-align: center">收货人：</td>
                             <td colspan="3" id="address"> </td>
                         </tr>
-                        
+                        <tr>
+                            <td style="width: 11%; text-align: center">备注：</td>
+                            <td colspan="3" id="memo" style="color: red;"> </td>
+                        </tr>
                         <tr>
                             <td colspan="2" class="imagerow"> 
                                 <div style="width: 100%; height: 100%;">
@@ -219,11 +222,15 @@
                             <td colspan="3" id="delivery2"> </td>
     
                         </tr>
+                         <tr class ="">
+                            <td  style="width: 11%; text-align: center;">备注：</td>
+                            <td colspan="3" id="memo2" style="font-weight: bold;"> </td>
+                        </tr>
                         <tr class ="addressLine">
                             <td  style="width: 11%; text-align: center">收货人：</td>
                             <td colspan="3" id="address2"> </td>
                         </tr>
-                        
+                       
   
               
                     </table>
@@ -278,7 +285,7 @@
     <script src="./js/print.min.js" ></script>
 
     <script src="./js/lodash.js"></script>
-     <script src="./js/order.js"></script>
+     <script src="./js/order.js?id=1"></script>
 
      <script src="../build/js/custom.min.js"></script>
 </asp:Content>

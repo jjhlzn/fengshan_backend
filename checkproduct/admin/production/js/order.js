@@ -10,7 +10,7 @@ function getOrderNo() {
 }
 
 function setPrintTable(order) {
-    var string = "taobaoId,receiveOrderPerson, orderDate, deliveryDate, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, memo, amount, orderName,style";
+    var string = "taobaoId,receiveOrderPerson, orderDate, deliveryDate, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, memo, amount, orderName,style,memo";
     var properties = string.split(",");
     properties.forEach(function (prop) {
         $('#' + _.trim(prop) + '2').html(order[_.trim(prop)]);
@@ -37,7 +37,7 @@ $(document).ready(function(){
          }
          var order = result.order;
 
-         var string = "taobaoId,receiveOrderPerson, orderDate, deliveryDate, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, memo, amount, orderName,style";
+         var string = "taobaoId,receiveOrderPerson, orderDate, deliveryDate, size, carveStyle, color, deliveryCompany, deliveryPayType, deliveryPackage, address, memo, amount, orderName,style,memo";
          var properties = string.split(",");
          properties.forEach(function (prop) {
              $('#' + _.trim(prop)).html(order[_.trim(prop)]);

@@ -88,8 +88,6 @@ function submitForm() {
       .fail(function () {
           alert("下单失败");
       })
-      .always(function () {
-      });
 }
 
 function checkForm(order) {

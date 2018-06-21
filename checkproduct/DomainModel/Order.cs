@@ -130,4 +130,62 @@ namespace fengshan.DomainModel
 
         public static FlowStatus FinishStatus = new FlowStatus("完成", 10000);
     }
+
+    public class Config
+    {
+        public static List<Config> ALL_CONFIGS = new List<Config>();
+        public string code = "";
+        public string name = "";
+        public List<ConfigItem> items = new List<ConfigItem>();
+
+        public Config() { }
+        public Config(string code, string name)
+        {
+            this.code = code;
+            this.name = name;
+        }
+
+        public static Config JDR = new Config("JDR", "接单人");
+        public static Config DKFS =  new Config("DKFS", "雕刻方式");
+        public static Config CZ =  new Config("CZ", "材质");
+        public static Config CZDB =  new Config("CZDB", "材质-独板");
+        public static Config WLGS =  new Config("WLGS", "物流公司");
+        public static Config WLZFFS =  new Config("WLZFFS", "物流支付方式");
+        public static Config WLDBFS =  new Config("WLDBFS", "物流打包方式");
+        public static Config KS =  new Config("KS", "款式");
+
+        static Config()
+        {
+            ALL_CONFIGS.Add(JDR);
+            ALL_CONFIGS.Add(DKFS);
+            ALL_CONFIGS.Add(CZ);
+            ALL_CONFIGS.Add(CZDB);
+            ALL_CONFIGS.Add(WLGS);
+            ALL_CONFIGS.Add(WLZFFS);
+            ALL_CONFIGS.Add(WLDBFS);
+            ALL_CONFIGS.Add(KS);
+        }
+
+        public static Config getConfig(string code)
+        {
+            foreach(Config config in ALL_CONFIGS)
+            {
+                if (code == config.code)
+                {
+                    return config;
+                }
+            }
+            return null;
+        }
+    }
+
+    public class ConfigItem
+    {
+        public string id;
+        public string typeName;
+        public string typeCode;
+        public string name;
+        public string value;
+        public int sequence;
+    }
 }
