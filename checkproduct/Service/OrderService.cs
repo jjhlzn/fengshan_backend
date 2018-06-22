@@ -77,13 +77,18 @@ namespace fengshan.Service
             }
         }
 
-        public QueryResult search(string startDate, string endDate, string keyword, int pageNo, int pageSize)
+        public QueryResult search(string startDate, string endDate, string keyword, bool isShowFinished, int pageNo, int pageSize)
         {
             string orderSum = @"orderNo + taobaoId + receiveOrderPerson  +material +
                                 size + carveStyle + color + deliveryCompany +deliveryPayType +deliveryPackage + 
                                 address + memo + orderName";
 
             string where = " deliveryDate between '" + startDate + "' and '" + endDate + "'  and  " + orderSum + " like '%" + keyword + "%' and flag = 0 ";
+
+            if (!isShowFinished)
+            {
+                where += " and orderNo not in (select aa.orderNo from t_order_status as aa where aa.statusName = '完成' and aa.isFinished = 1)";
+            } 
 
             int skipCount = pageNo * pageSize;
 
@@ -201,30 +206,70 @@ namespace fengshan.Service
         {
             using (IDbConnection conn = ConnectionFactory.GetInstance())
             {
+                string sql = @"select sequence from t_order_status where orderNo = @orderNo and statusName = @statusName";
+               
+                int sequence = conn.QueryFirstOrDefault<int>(sql, new { orderNo, statusName });
+                
+                if (isFinished)
+                {
+                    sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and sequence <= @sequence";
+                } else
+                {
+                    sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and sequence >= @sequence";
+                }
+
+                logger.Debug(sql);
+
+                if ( conn.Execute(sql, new { orderNo = orderNo, sequence = sequence, isFinished = isFinished, handleTime = DateTime.Now }) > 0)
+                {
+                    setOrderStatusFinished(orderNo);
+                    return true; 
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+
+        public bool setOrderFlowStatus2(string orderNo, string statusName, bool isFinished)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
                 string sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = @statusName";
                 logger.Debug(sql);
                 int count = conn.Execute(sql, new { orderNo = orderNo, statusName = statusName, isFinished = isFinished, handleTime = DateTime.Now });
                 logger.Debug("count = " + count);
                 if (count >= 1)
                 {
-                    sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";
-                    List<FlowStatus> statusList = conn.Query<FlowStatus>(sql).AsList();
-                    bool isOrderFinished = true;
-                    foreach (FlowStatus status in statusList)
-                    {
-                        if (status.name != "完成")
-                        {
-                            isOrderFinished = isOrderFinished && status.isFinished;
-                        }
-                    }
-                    sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = '完成'";
-                    count = conn.Execute(sql, new { orderNo = orderNo, isFinished = isOrderFinished, handleTime = DateTime.Now });
-                    return count >= 1;
+                    setOrderStatusFinished(orderNo);
+                    return true;
                 }
                 else
                 {
                     return false;
                 }
+            }
+        }
+
+        private void setOrderStatusFinished(string orderNo)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql =  @"select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";
+                List<FlowStatus> statusList = conn.Query<FlowStatus>(sql).AsList();
+                bool isOrderFinished = true;
+                foreach (FlowStatus status in statusList)
+                {
+                    if (status.name != "完成")
+                    {
+                        isOrderFinished = isOrderFinished && status.isFinished;
+                    }
+                }
+                sql = @"update t_order_status set isFinished = @isFinished, handletime = @handleTime where orderNo = @orderNo and statusName = '完成'";
+                conn.Execute(sql, new { orderNo = orderNo, isFinished = isOrderFinished, handleTime = DateTime.Now });
+
             }
         }
 

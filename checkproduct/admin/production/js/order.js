@@ -45,6 +45,8 @@ $(document).ready(function(){
 
          setPrintTable(order)
 
+        
+
          $('#material').html(order['material'] + ' &nbsp;&nbsp;  ' +order['isDuban']);
 
          $('#delivery').html(order.deliveryCompany + ' - ' + order.deliveryPayType + ' - ' + order.deliveryPackage);

@@ -12,7 +12,9 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-    <link href="./css/orders.css" rel="stylesheet">
+     <link href="./css/site.css?id=3" rel="stylesheet">
+    <link href="./css/orders.css?id=3" rel="stylesheet">
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
@@ -37,14 +39,15 @@
                       <table class="searchTable">
                           <tr>
                               <td>关键字:</td>
-                              <td><input id="keyword" class="searchInput keywordInput" type="text" name="middle-name"></td>
+                              <td><input id="keyword" class="searchInput keywordInput" type="text" ></td>
                               <td>发货时间:</td>
-                              <td><input id="startDate" class="searchInput" type="text" name="middle-name" 
+                              <td><input id="startDate" class="searchInput" type="text"
                                   onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})"></td>
                               <td>至</td>
-                              <td><input id="endDate" class="searchInput" type="text" name="middle-name" 
+                              <td><input id="endDate" class="searchInput" type="text"
                                   onclick="WdatePicker({minDate:'2017-01-01',maxDate:'2020-12-31'})"></td>
-                              <td></td>
+                              <td>显示已完成:</td>
+                              <td><input id="isShowFinished" type="checkBox" /></td>
                               <td><button  class=" searchBtn" onclick="searchClick(); return false;">查询</button></td>
                           </tr>
                       </table>
@@ -114,9 +117,11 @@
     <script src="../vendors/iCheck/icheck.min.js"></script>
         <script src="../My97DatePicker/WdatePicker.js"></script>
      <script src="./js/lodash.js"></script>
+    
+        <script src="./js/moment/moment.min.js"></script>
 
-
-        <script src="./js/orders.js?id=2"></script>
+     <script src="./js/site.js?id=3"></script>
+        <script src="./js/orders.js?id=3"></script>
 
     <!-- Custom Theme Scripts -->
 

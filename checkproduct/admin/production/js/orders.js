@@ -41,8 +41,6 @@ var Pagination = {
         Pagination.code += '<a>1</a><i>...</i>';
     },
 
-
-
     // --------------------
     // Handlers
     // --------------------
@@ -52,10 +50,9 @@ var Pagination = {
         Pagination.page = +this.innerHTML;
         Pagination.Start();
 
-
         console.log("page click: " + Pagination.page)
         var queryObj = getQueryObj();
-        queryObj.pageNo = parseInt(Pagination.page) - 1;
+        queryObj.pageNo = parseInt(Pagination.page);
         queryObj.pageSize = pageSize;
         loadOrders(queryObj);
     },
@@ -67,6 +64,10 @@ var Pagination = {
             Pagination.page = 1;
         }
         Pagination.Start();
+        var queryObj = getQueryObj();
+        queryObj.pageNo = parseInt(Pagination.page);
+        queryObj.pageSize = pageSize;
+        loadOrders(queryObj);
     },
 
     // next page
@@ -76,6 +77,10 @@ var Pagination = {
             Pagination.page = Pagination.size;
         }
         Pagination.Start();
+        var queryObj = getQueryObj();
+        queryObj.pageNo = parseInt(Pagination.page);
+        queryObj.pageSize = pageSize;
+        loadOrders(queryObj);
     },
 
 
@@ -120,8 +125,6 @@ var Pagination = {
         }
         Pagination.Finish();
     },
-
-
 
     // --------------------
     // Initialization
@@ -178,7 +181,8 @@ function getQueryObj() {
     var queryObj = {
         startDate: startDate,
         endDate: endDate,
-        keyword: $('#keyword').val() ? $('#keyword').val() : ''
+        keyword: $('#keyword').val() ? $('#keyword').val() : '',
+        isShowFinished: $('#isShowFinished')[0].checked
     }
 
     return queryObj;
@@ -186,7 +190,7 @@ function getQueryObj() {
 
 function searchClick() {
     var queryObj = getQueryObj();
-    queryObj.pageNo = 0;
+    queryObj.pageNo = 1;
     queryObj.pageSize = pageSize;
     loadOrders(queryObj);
     return false;
@@ -195,7 +199,8 @@ function searchClick() {
 function loadOrders(queryObj) {
     $('#orderMenu').addClass('active')
     $('#orderMenu ul').css('display', 'block')
-
+    updateWindowUrl('pageNo', queryObj.pageNo)
+    queryObj.pageNo = queryObj.pageNo - 1;
     $.post("/getorders.aspx", JSON.stringify(queryObj))
       .done(function (data) {
           //alert("下单成功");
@@ -203,9 +208,18 @@ function loadOrders(queryObj) {
           var result = JSON.parse(data);
           var items = JSON.parse(data).items;
           $('#tableBody').html('')
-          items.forEach( function(order) {
-              $('<tr>', { "class": "pointer" })
-                 .append($('<td>').append($('<a>', {'href': "order.aspx?orderNo=" + order.orderNo}).html(order.orderNo)))
+          items.forEach(function (order) {
+             
+              var orderNoClass = "";
+              if (isOrderTimeout(order)) {
+                  orderNoClass = 'red';
+              } else if (isOrderFinished(order)) {
+                  orderNoClass = 'green'
+              }
+
+              $('<tr>', { "class": "pointer "  })
+
+                 .append($('<td>').append($('<a>', {'href': "order.aspx?orderNo=" + order.orderNo}).append( $('<span>', {'class': orderNoClass}).html(order.orderNo)) ))
                  .append($('<td>').html(order.orderName))
                  .append($('<td>').html(order.deliveryDate.substr(0, 10)))
                  .append($('<td>').html(order.orderDate.substr(0, 10)))
@@ -244,7 +258,7 @@ $(document).ready(function () {
     $('#startDate').val('2018-01-01');
     $('#endDate').val('2018-12-31');
     var queryObj = getQueryObj();
-    queryObj.pageNo = 0;
+    queryObj.pageNo = getQueryParam('pageNo') ? getQueryParam('pageNo') : 1;
     queryObj.pageSize = pageSize;
     loadOrders(queryObj);
 });

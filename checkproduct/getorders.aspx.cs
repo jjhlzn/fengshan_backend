@@ -15,6 +15,7 @@ namespace fengshan
         public string endDate;
         public string keyword;
         public string status;
+        public bool isShowFinished;
         public int pageNo;
         public int pageSize;
         
@@ -33,7 +34,7 @@ namespace fengshan
 
             QueryRequest query = JsonConvert.DeserializeObject<QueryRequest>(json);
 
-            QueryResult result = new OrderService().search(query.startDate, query.endDate, query.keyword, query.pageNo, query.pageSize);
+            QueryResult result = new OrderService().search(query.startDate, query.endDate, query.keyword, query.isShowFinished, query.pageNo, query.pageSize);
 
             var resp = new
             {

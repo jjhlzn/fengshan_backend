@@ -103,6 +103,8 @@
     <Content Include="admin\production\images\prod-5.jpg" />
     <Content Include="admin\production\images\user.png" />
     <Content Include="admin\production\images\visa.png" />
+    <Content Include="admin\production\js\chart.js" />
+    <Content Include="admin\production\js\chart.min.js" />
     <Content Include="admin\production\js\config.js" />
     <Content Include="admin\production\js\datepicker\daterangepicker.js" />
     <Content Include="admin\production\js\dropzone.js" />
@@ -115,6 +117,7 @@
     <Content Include="admin\production\js\orders.js" />
     <Content Include="admin\production\js\pagination.min.js" />
     <Content Include="admin\production\js\print.min.js" />
+    <Content Include="admin\production\js\report.js" />
     <Content Include="admin\production\login.aspx" />
     <Content Include="admin\production\login.html" />
     <Content Include="admin\My97DatePicker\calendar.js" />
@@ -141,6 +144,7 @@
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="admin\production\configlist.aspx" />
+    <Content Include="admin\production\report.aspx" />
     <Content Include="admin\production\support.aspx" />
     <Content Include="admin\production\order.aspx" />
     <Content Include="admin\production\neworder.aspx" />
@@ -2917,6 +2921,7 @@
     <Content Include="login.aspx" />
     <Content Include="logoutpc.aspx" />
     <Content Include="neworder.aspx" />
+    <Content Include="report.aspx" />
     <Content Include="setflowstatus.aspx" />
     <Content Include="test.aspx" />
     <Content Include="upload.aspx" />
@@ -2943,6 +2948,10 @@
     </Compile>
     <Compile Include="admin\production\configlist.aspx.cs">
       <DependentUpon>configlist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\report.aspx.cs">
+      <DependentUpon>report.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\production\support.aspx.cs">
@@ -3028,9 +3037,17 @@
     </Compile>
     <Compile Include="other\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="report.aspx.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report.aspx.designer.cs">
+      <DependentUpon>report.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Service\CheckOrderService.cs" />
     <Compile Include="Service\ConfigService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\ReportService.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="setflowstatus.aspx.cs">
       <DependentUpon>setflowstatus.aspx</DependentUpon>

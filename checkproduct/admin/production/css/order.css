@@ -78,3 +78,7 @@ tr {
     font-size: 20px;
     font-weight: bold;
 }
+
+#tableBody tr.timeoutorder {
+    color: red;
+}
