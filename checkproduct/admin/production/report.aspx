@@ -89,10 +89,13 @@
 
             <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="./js/chart.js"></script>
+    <script src="./js/report.js"></script>
+        <!-- Bootstrap -->
 
-     <script src="./js/chart.js"></script>
+     
 
-     <script src="./js/report.js"></script>
+     
 
 </asp:Content>
 

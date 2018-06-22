@@ -81,6 +81,7 @@
     <Content Include="admin\production\css\dropzone.css" />
     <Content Include="admin\production\css\login.css" />
     <Content Include="admin\production\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="admin\production\css\site.css" />
     <Content Include="admin\production\css\order.css" />
     <Content Include="admin\production\css\neworder.css" />
     <Content Include="admin\production\css\orders.css" />
@@ -118,6 +119,7 @@
     <Content Include="admin\production\js\pagination.min.js" />
     <Content Include="admin\production\js\print.min.js" />
     <Content Include="admin\production\js\report.js" />
+    <Content Include="admin\production\js\site.js" />
     <Content Include="admin\production\login.aspx" />
     <Content Include="admin\production\login.html" />
     <Content Include="admin\My97DatePicker\calendar.js" />

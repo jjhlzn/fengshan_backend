@@ -35,8 +35,8 @@
 
                   <div class="x_content">
 
-                     <div class="row">
-                      <table class="searchTable">
+                     <div class="table-responsive" style="background-color: white;">
+                      <table class=" searchTable" style="background-color: white;">
                           <tr>
                               <td>关键字:</td>
                               <td><input id="keyword" class="searchInput keywordInput" type="text" ></td>
