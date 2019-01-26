@@ -41,6 +41,7 @@
                     <h2>订单信息 <small></small></h2>
                     <div class="nav navbar-right panel_toolbox">
                             <button class="btn btn-success " onclick="printClick();return false;">打印</button>
+                            <button class="btn btn-primary "  onclick="modifyClick();return false;">修改</button>
                             <button class="btn btn-danger " onclick="deleteOrderClick(); return false;">删除</button>
                     </div>
                     <div class="clearfix"></div>
@@ -285,7 +286,8 @@
     <script src="./js/print.min.js" ></script>
 
     <script src="./js/lodash.js"></script>
-     <script src="./js/order.js?id=1"></script>
+    <script src="./js/site.js?id=1"></script>
+     <script src="./js/order.js?id=2"></script>
 
      <script src="../build/js/custom.min.js"></script>
 </asp:Content>

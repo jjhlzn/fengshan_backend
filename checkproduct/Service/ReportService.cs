@@ -15,7 +15,7 @@ namespace fengshan.Service
 
         private ConfigService configService = new ConfigService();
 
-        public Object getReport()
+        public Object getReport(string device = "PC")
         {
 
             using (IDbConnection conn = ConnectionFactory.GetInstance())
@@ -39,7 +39,7 @@ orderNo in (select orderNo from t_order_status where statusName = '完成' and i
                 {
                     notFinishedOrders = notFinishedOrders,
                     timeoutOrders = timeoutOrders,
-                    orderChart = getOrderChartData()
+                    orderChart = getOrderChartData(device)
                 };
 
 
@@ -55,7 +55,9 @@ orderNo in (select orderNo from t_order_status where statusName = '完成' and i
             public int notFinishedOrder;
             public int timeoutOrder;
         }
-        private Object getOrderChartData()
+
+
+        private Object getOrderChartData(string device = "PC")
         {
             using (IDbConnection conn = ConnectionFactory.GetInstance())
             {
@@ -72,21 +74,26 @@ orderNo in (select orderNo from t_order_status where statusName = '完成' and i
 
                 List<OrderChartDataItem> items = conn.Query<OrderChartDataItem>(sql).AsList();
 
-                List<string> labels = new List<string>();
-                List<int> notFinishedOrders = new List<int>();
-                List<int> timeoutOrders = new List<int>();
-
-                foreach(OrderChartDataItem item in items)
+                if (device == "WX")
                 {
-                    labels.Add(item.name);
-                    notFinishedOrders.Add(item.notFinishedOrder);
-                    timeoutOrders.Add(item.timeoutOrder);
-                }
-
-                var result = new
+                    return items;
+                } else
                 {
-                    labels = labels,
-                    datasets = new[] { new {
+                    List<string> labels = new List<string>();
+                    List<int> notFinishedOrders = new List<int>();
+                    List<int> timeoutOrders = new List<int>();
+
+                    foreach (OrderChartDataItem item in items)
+                    {
+                        labels.Add(item.name);
+                        notFinishedOrders.Add(item.notFinishedOrder);
+                        timeoutOrders.Add(item.timeoutOrder);
+                    }
+
+                    var result = new
+                    {
+                        labels = labels,
+                        datasets = new[] { new {
                                             label = "未完成",
                                             backgroundColor = "#1ABB9C",
                                             data =  notFinishedOrders
@@ -97,10 +104,13 @@ orderNo in (select orderNo from t_order_status where statusName = '完成' and i
                                             data =  timeoutOrders
                                         }
                         }
-                };
+                    };
 
 
-                return result;
+                    return result;
+                }
+
+                
             }
         }
     }

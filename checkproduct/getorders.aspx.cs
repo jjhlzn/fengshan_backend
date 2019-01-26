@@ -31,7 +31,7 @@ namespace fengshan
             Stream req = Request.InputStream;
             req.Seek(0, System.IO.SeekOrigin.Begin);
             string json = new StreamReader(req).ReadToEnd();
-
+            logger.Debug(json);
             QueryRequest query = JsonConvert.DeserializeObject<QueryRequest>(json);
 
             QueryResult result = new OrderService().search(query.startDate, query.endDate, query.keyword, query.isShowFinished, query.pageNo, query.pageSize);

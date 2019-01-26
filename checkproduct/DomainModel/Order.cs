@@ -45,6 +45,7 @@ namespace fengshan.DomainModel
         public List<string> contentImages = new List<string>();
         public List<string> templateImages = new List<string>();
         public List<String> otherImages = new List<string>();
+        public string otherImageUpdateTime = "";
         public Flow flow;
 
         public Order() { }

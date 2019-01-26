@@ -220,13 +220,15 @@ function loadOrders(queryObj) {
               $('<tr>', { "class": "pointer "  })
 
                  .append($('<td>').append($('<a>', {'href': "order.aspx?orderNo=" + order.orderNo}).append( $('<span>', {'class': orderNoClass}).html(order.orderNo)) ))
-                 .append($('<td>').html(order.orderName))
-                 .append($('<td>').html(order.deliveryDate.substr(0, 10)))
-                 .append($('<td>').html(order.orderDate.substr(0, 10)))
-                 .append($('<td>').html(order.flow.currentStatus))
-                 .append($('<td>').html(order.amount))
-                 .append($('<td>').html(order.receiveOrderPerson))
-                  .append($('<td>').append($('<a>', { 'href': "order.aspx?orderNo=" + order.orderNo }).html('查看')))
+                 .append($('<td>').append($('<span>').html(order.orderName)))
+                 .append($('<td>').append($('<span>').html(order.deliveryDate.substr(0, 10))))
+                 .append($('<td>').append($('<span>').html(order.orderDate.substr(0, 10))))
+                 .append($('<td>').append($('<span>').html(order.flow.currentStatus)))
+                 .append($('<td>').append($('<span>').html(order.amount)))
+                 .append($('<td>').append($('<span>').html(order.receiveOrderPerson)))
+                 .append($('<td>').append($('<span>').append($('<a>', { 'href': "order.aspx?orderNo=" + order.orderNo }).html('查看'))
+                                                     .append($('<a>', { 'href': "modifyorder.aspx?orderNo=" + order.orderNo, style: 'margin-left: 15px;' }).html('修改'))
+                  ))
                  .appendTo('#tableBody');
           })
 

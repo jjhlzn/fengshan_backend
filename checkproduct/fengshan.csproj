@@ -81,6 +81,7 @@
     <Content Include="admin\production\css\dropzone.css" />
     <Content Include="admin\production\css\login.css" />
     <Content Include="admin\production\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="admin\production\css\modifyorder.css" />
     <Content Include="admin\production\css\site.css" />
     <Content Include="admin\production\css\order.css" />
     <Content Include="admin\production\css\neworder.css" />
@@ -113,6 +114,7 @@
     <Content Include="admin\production\js\login.js" />
     <Content Include="admin\production\js\master.js" />
     <Content Include="admin\production\js\moment\moment.min.js" />
+    <Content Include="admin\production\js\modifyorder.js" />
     <Content Include="admin\production\js\neworder.js" />
     <Content Include="admin\production\js\order.js" />
     <Content Include="admin\production\js\orders.js" />
@@ -146,6 +148,7 @@
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="admin\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="admin\production\configlist.aspx" />
+    <Content Include="admin\production\modifyorder.aspx" />
     <Content Include="admin\production\report.aspx" />
     <Content Include="admin\production\support.aspx" />
     <Content Include="admin\production\order.aspx" />
@@ -2922,6 +2925,7 @@
     <Content Include="index.html" />
     <Content Include="login.aspx" />
     <Content Include="logoutpc.aspx" />
+    <Content Include="modifyorder.aspx" />
     <Content Include="neworder.aspx" />
     <Content Include="report.aspx" />
     <Content Include="setflowstatus.aspx" />
@@ -2951,6 +2955,13 @@
     <Compile Include="admin\production\configlist.aspx.cs">
       <DependentUpon>configlist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\modifyorder.aspx.cs">
+      <DependentUpon>modifyorder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\production\modifyorder.aspx.designer.cs">
+      <DependentUpon>modifyorder.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\production\report.aspx.cs">
       <DependentUpon>report.aspx</DependentUpon>
@@ -3016,6 +3027,13 @@
     <Compile Include="logoutpc.aspx.designer.cs">
       <DependentUpon>logoutpc.aspx</DependentUpon>
     </Compile>
+    <Compile Include="modifyorder.aspx.cs">
+      <DependentUpon>modifyorder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="modifyorder.aspx.designer.cs">
+      <DependentUpon>modifyorder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="neworder.aspx.cs">
       <DependentUpon>neworder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3041,7 +3059,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="report.aspx.cs">
       <DependentUpon>report.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="report.aspx.designer.cs">
       <DependentUpon>report.aspx</DependentUpon>

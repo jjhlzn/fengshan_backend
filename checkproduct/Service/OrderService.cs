@@ -31,7 +31,6 @@ namespace fengshan.Service
                                (@id, @orderNo, @taobaoId, @receiveOrderPerson, @orderDate,
                                @deliveryDate, @material, @size, @carveStyle, @color, @deliveryCompany, @deliveryPayType, @deliveryPackage, @address,
                                @memo, @amount, @orderName, @style, @isDuban)";
-                sql = string.Format(sql, sql);
                 logger.Debug("sql: " + sql);
                 logger.Debug("order.orderDate = " + order.orderDate);
                 logger.Debug("order.deliveryDate = " + order.deliveryDate);
@@ -77,6 +76,64 @@ namespace fengshan.Service
             }
         }
 
+        public bool updateOrder(Order order)
+        {
+            using (IDbConnection conn = ConnectionFactory.GetInstance())
+            {
+                string sql = @"update t_order set taobaoId = @taobaoId, receiveOrderPerson = @receiveOrderPerson, orderDate = @orderDate, 
+                               deliveryDate = @deliveryDate, material = @material, size = @size, carveStyle = @carveStyle, color = @color, 
+                               deliveryCompany = @deliveryCompany, deliveryPayType = @deliveryPayType, deliveryPackage = @deliveryPackage, 
+                               address = @address, memo = @memo, amount = @amount, orderName = @orderName, style = @style, isDuban = @isDuban
+                               where orderNo = @orderNo";
+
+                int rowCount = conn.Execute(sql, new
+                {
+                    taobaoId = order.taobaoId,
+                    receiveOrderPerson = order.receiveOrderPerson,
+                    orderDate = order.orderDate,
+                    deliveryDate = order.deliveryDate,
+                    material = order.material,
+                    size = order.size,
+                    carveStyle = order.carveStyle,
+                    color = order.color,
+                    deliveryCompany = order.deliveryCompany,
+                    deliveryPayType = order.deliveryPayType,
+                    deliveryPackage = order.deliveryPackage,
+                    address = order.address,
+                    memo = order.memo,
+                    amount = order.amount,
+                    orderName = order.orderName,
+                    style = order.style,
+                    isDuban = order.isDuban,
+                    orderNo = order.orderNo
+                });
+
+                if (rowCount != 1)
+                {
+                    logger.Fatal("update t_order fail");
+                    return false;
+                }
+
+                //删除以前的内容图片和样板图片
+                sql = @"delete from t_order_img where orderNo = @orderNo and type = @type";
+                conn.Execute(sql, new { orderNo = order.orderNo, type = "content" });
+                conn.Execute(sql, new { orderNo = order.orderNo, type = "template" });
+
+                //关联图片
+                sql = @"insert into t_order_img (id, orderNo, type, imageurl) values (@id, @orderNo, @type, @imageUrl)";
+                foreach (string imageUrl in order.contentImages)
+                {
+                    conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = order.orderNo, type = "content", imageUrl = imageUrl });
+                }
+                foreach (string imageUrl in order.templateImages)
+                {
+                    conn.Execute(sql, new { id = Guid.NewGuid().ToString(), orderNo = order.orderNo, type = "template", imageUrl = imageUrl });
+                }
+
+                return true;
+            }
+        }
+
         public QueryResult search(string startDate, string endDate, string keyword, bool isShowFinished, int pageNo, int pageSize)
         {
             string orderSum = @"orderNo + taobaoId + receiveOrderPerson  +material +
@@ -95,7 +152,7 @@ namespace fengshan.Service
             string sql = @"select top " + pageSize + @" orderNo, taobaoId , receiveOrderPerson, CONVERT(varchar(100), orderDate, 23) as orderDate, CONVERT(varchar(100), deliveryDate, 23) as deliveryDate, material,
                                 size, carveStyle , color , deliveryCompany , deliveryPayType , deliveryPackage, orderName,
                                 address, memo  from t_order where " + where + " and id not in (select top " + skipCount + @" id from t_order
-                          where " + where + @" order by deliveryDate) order by deliveryDate, orderNo";
+                          where " + where + @" order by deliveryDate, orderNo) order by deliveryDate, orderNo";
 
             logger.Debug(sql);
 
@@ -146,7 +203,11 @@ namespace fengshan.Service
             return result;
         }
 
-
+        class TrackImage
+        {
+            public string imageUrl;
+            public string updateTime;
+        }
         public Order getOrder(string orderNo)
         {
 
@@ -169,9 +230,18 @@ namespace fengshan.Service
                 urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
                 order.templateImages = urls;
 
-                sql = "select imageUrl from t_order_img where orderNo = @orderNo and type = 'other' order by addtime";
-                urls = conn.Query<string>(sql, new { orderNo = orderNo }).AsList();
-                order.otherImages = urls;
+                sql = "select imageUrl, CONVERT(varchar(100), addtime, 120) as updateTime from t_order_img where orderNo = @orderNo and type = 'other' order by addtime";
+                List<TrackImage> trackImages = conn.Query<TrackImage>(sql, new { orderNo = orderNo }).AsList();
+                order.otherImages = new List<string>();
+                foreach(TrackImage image in trackImages)
+                {
+                    order.otherImages.Add(image.imageUrl);
+                }
+
+                if (order.otherImages.Count > 0)
+                {
+                    order.otherImageUpdateTime = trackImages[trackImages.Count - 1].updateTime;
+                }
 
                 //加载状态
                 sql = "select orderNo, statusName as name, isFinished, handletime as finishDate, sequence from t_order_status where orderNo = '" + orderNo + "'";

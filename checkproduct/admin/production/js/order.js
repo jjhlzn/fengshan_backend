@@ -20,7 +20,68 @@ function setPrintTable(order) {
     $('#material2').html(order['material'] + ' &nbsp;&nbsp;  ' + order['isDuban']);
 
     $('#delivery2').html(order.deliveryCompany + ' - ' + order.deliveryPayType + ' - ' + order.deliveryPackage);
-} 
+}
+
+
+
+function clickStatus(statusDiv) {
+    var name = $($(statusDiv).children()[1]).html()
+    var sequence = $($(statusDiv).children()[1]).attr('sequence')
+    var isFinished = $($(statusDiv).children()[1]).attr('isFinished') == '1'
+
+    $.post("/setflowstatus.aspx", JSON.stringify({ orderNo: getOrderNo(), statusName: name, isFinished: !isFinished}))
+    .done(function (data) {
+        //alert("下单成功");
+        console.log(data);
+        var result = JSON.parse(data);
+        if (result.status != 0) {
+            alert('设置失败');
+            return;
+        }
+        setOrderStatus(name, sequence, !isFinished)
+    })
+}
+
+function setOrderStatus(name, sequence, isFinished) {
+    $('.statusDiv').each(function () {
+       
+        var s = $($(this).children()[1]).attr('sequence')
+        if (isFinished) {
+            if (s <= sequence) {
+                $($(this).children()[1]).attr('isFinished', '1')
+                $($(this).children()[0]).attr('src', './images/finished.png')
+            }
+        } else {
+            if (s >= sequence) {
+                $($(this).children()[1]).attr('isFinished', '0')
+                $($(this).children()[0]).attr('src', './images/notfinished.png')
+            }
+        }
+    })
+
+    var isOrderFinished = true
+    $('.statusDiv').each(function () {
+        var n = $($(this).children()[1]).html()
+        if (n != '完成') {
+            isOrderFinished = isOrderFinished && $($(this).children()[1]).attr('isFinished') == '1'
+        }
+    })
+
+    
+    $('.statusDiv').each(function () {
+        var n = $($(this).children()[1]).html()
+        if (n == '完成') {
+            if (isOrderFinished) {
+                $($(this).children()[1]).attr('isFinished', '1')
+                $($(this).children()[0]).attr('src', './images/finished.png')
+            } else {
+                $($(this).children()[1]).attr('isFinished', '0')
+                $($(this).children()[0]).attr('src', './images/notfinished.png')
+            }
+        } 
+    })
+    
+}
 
 $(document).ready(function(){
     $('#orderMenu').addClass('active')
@@ -70,9 +131,9 @@ $(document).ready(function(){
          statusList.forEach(function (status) {
              
              $('<td>').append(
-                $('<div>', { 'class': 'statusDiv' })
+                $('<div>', { 'class': 'statusDiv', onclick: 'clickStatus(this)' })
                     .append($('<img>', {'src': status.isFinished ? './images/finished.png' : './images/notfinished.png', 'class': 'statusImage'}))
-                    .append($('<p>', {'class': 'statusText'}).html(status.name))
+                    .append($('<p>', { 'class': 'statusText', sequence: status.sequence, isFinished: status.isFinished ? "1" : "0"}).html(status.name))
              ).appendTo('#progressRow');
 
              console.log(status.name != '完成')
@@ -92,6 +153,10 @@ function deleteOrderClick() {
     if (window.confirm('你确认删除吗？')) {
         deleteOrder();
     }
+}
+
+function modifyClick() {
+    window.location.href = "/admin/production/modifyorder.aspx?orderNo="+getQueryParam('orderNo')
 }
 
 function deleteOrder() {
